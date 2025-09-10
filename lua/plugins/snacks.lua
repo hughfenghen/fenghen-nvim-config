@@ -24,6 +24,12 @@ return {
         -- wo = { wrap = true } -- Wrap notifications
       },
     },
+    win = {
+      wo = {
+        wrap = true,
+        linebreak = true, -- 在单词边界换行，更美观
+      },
+    },
     zen = {
       on_open = function()
         vim.wo.number = true
