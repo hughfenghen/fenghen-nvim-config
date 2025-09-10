@@ -54,7 +54,7 @@ return {
     },
     -- 手动完成（保留原有的）
     {
-      "<M-.>",
+      "<C-.>",
       function() require("neocodeium").cycle_or_complete() end,
       mode = "i",
       desc = "Manual complete",

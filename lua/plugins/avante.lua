@@ -15,7 +15,7 @@ return {
     -- this file can contain specific instructions for your project
     instructions_file = "avante.md",
     -- for example
-    provider = "gemini-cli",
+    provider = "claude",
     providers = {
       claude = {
         endpoint = "https://api.anthropic.com",
@@ -33,17 +33,6 @@ return {
         extra_request_body = {
           temperature = 0.75,
           max_tokens = 32768,
-        },
-      },
-    },
-    acp_providers = {
-      ["gemini-cli"] = {
-        command = "gemini",
-        args = { "--experimental-acp" },
-        env = {
-          NODE_NO_WARNINGS = "1",
-          -- os.getenv("GEMINI_API_KEY"),
-          GEMINI_API_KEY = "AIzaSyCjGDRn5B2_qMV23MD4UcLhRVUY1nq_uR8",
         },
       },
     },
