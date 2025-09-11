@@ -10,16 +10,16 @@ return {
     {
       "<leader>sr",
       function() require("grug-far").open() end,
-      desc = "Search and Replace"
+      desc = "Search and Replace",
     },
     {
       "<leader>sw",
-      function() 
-        require("grug-far").open({ 
-          prefills = { search = vim.fn.expand("<cword>") } 
-        }) 
+      function()
+        require("grug-far").open {
+          prefills = { search = vim.fn.expand "<cword>" },
+        }
       end,
-      desc = "Search current word"
+      desc = "Search current word",
     },
   },
 }

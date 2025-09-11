@@ -8,10 +8,15 @@
 -- 查找所有 keymaps（快捷键）
 -- vim.keymap.set("n", "<leader>pk", "<cmd>Telescope keymaps<CR>", { desc = "Keymaps" })
 
-vim.api.nvim_set_keymap("n", "<S-Tab>", ":bprev<CR>", { noremap = true })
-vim.api.nvim_set_keymap("n", "<Tab>", ":bnext<CR>", { noremap = true })
+vim.o.autowriteall = true
+-- vim.api.nvim_set_option_value("colorcolumn", "100", {})
+-- vim.api.nvim_set_option_value("textwidth", 80, {})
+
+-- vim.api.nvim_set_keymap("n", "<S-Tab>", ":bprev<CR>", { noremap = true })
+-- vim.api.nvim_set_keymap("n", "<Tab>", ":bnext<CR>", { noremap = true })
 vim.keymap.set("n", "<Enter>", "o<Esc>", { noremap = true, silent = true, desc = "插入新行" })
 vim.keymap.set("n", "<S-Enter>", "i<Enter><Esc>", { noremap = true, silent = true, desc = "从当前光标断行" })
+vim.keymap.set("t", "<Esc>", [[<C-\><C-n>]])
 
 ---@type LazySpec
 return {
