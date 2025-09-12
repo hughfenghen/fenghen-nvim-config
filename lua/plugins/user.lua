@@ -17,6 +17,11 @@ vim.o.autowriteall = true
 vim.keymap.set("n", "<Enter>", "o<Esc>", { noremap = true, silent = true, desc = "插入新行" })
 vim.keymap.set("n", "<S-Enter>", "i<Enter><Esc>", { noremap = true, silent = true, desc = "从当前光标断行" })
 vim.keymap.set("t", "<Esc>", [[<C-\><C-n>]])
+-- 窗口切换：cmd + h/j/k/l
+vim.keymap.set("n", "eh", "<C-w>h", { desc = "切换到左边窗口" })
+vim.keymap.set("n", "el", "<C-w>l", { desc = "切换到右边窗口" })
+vim.keymap.set("n", "ej", "<C-w>j", { desc = "切换到下边窗口" })
+vim.keymap.set("n", "ek", "<C-w>k", { desc = "切换到上边窗口" })
 
 ---@type LazySpec
 return {
