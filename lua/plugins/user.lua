@@ -22,6 +22,7 @@ vim.keymap.set("n", "eh", "<C-w>h", { desc = "切换到左边窗口" })
 vim.keymap.set("n", "el", "<C-w>l", { desc = "切换到右边窗口" })
 vim.keymap.set("n", "ej", "<C-w>j", { desc = "切换到下边窗口" })
 vim.keymap.set("n", "ek", "<C-w>k", { desc = "切换到上边窗口" })
+vim.keymap.set("n", "<Space>bn", ":bnext<CR>", { noremap = true, silent = true })
 
 ---@type LazySpec
 return {
