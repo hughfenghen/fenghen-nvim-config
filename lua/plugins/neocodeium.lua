@@ -6,7 +6,7 @@ return {
     neocodeium.setup {
       -- 基本设置
       enabled = true,
-      manual = true,
+      manual = false,
     }
   end,
   keys = {

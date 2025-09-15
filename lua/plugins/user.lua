@@ -9,13 +9,34 @@
 -- vim.keymap.set("n", "<leader>pk", "<cmd>Telescope keymaps<CR>", { desc = "Keymaps" })
 
 vim.o.autowriteall = true
+
+local function feedkeys(keys)
+  local termcodes = vim.api.nvim_replace_termcodes(keys, true, false, true)
+  vim.api.nvim_feedkeys(termcodes, "n", false)
+end
+
 -- vim.api.nvim_set_option_value("colorcolumn", "100", {})
 -- vim.api.nvim_set_option_value("textwidth", 80, {})
 
 -- vim.api.nvim_set_keymap("n", "<S-Tab>", ":bprev<CR>", { noremap = true })
 -- vim.api.nvim_set_keymap("n", "<Tab>", ":bnext<CR>", { noremap = true })
-vim.keymap.set("n", "<Enter>", "o<Esc>", { noremap = true, silent = true, desc = "插入新行" })
-vim.keymap.set("n", "<S-Enter>", "i<Enter><Esc>", { noremap = true, silent = true, desc = "从当前光标断行" })
+vim.keymap.set("n", "<Enter>", function()
+  if vim.bo.modifiable and not vim.bo.readonly then
+    feedkeys "o<Esc>"
+  else
+    feedkeys "<Enter>"
+  end
+end, { noremap = true, silent = true, desc = "插入新行" })
+
+vim.keymap.set("n", "<S-Enter>", function()
+  if vim.bo.modifiable and not vim.bo.readonly then
+    feedkeys "i<Enter><Esc>"
+  else
+    feedkeys "<S-Enter>"
+  end
+end, { noremap = true, silent = true, desc = "从当前光标断行" })
+-- vim.keymap.set("n", "<S-Enter>", "i<Enter><Esc>", { noremap = true, silent = true, desc = "从当前光标断行" })
+
 vim.keymap.set("t", "<Esc>", [[<C-\><C-n>]])
 -- 窗口切换：cmd + h/j/k/l
 vim.keymap.set("n", "eh", "<C-w>h", { desc = "切换到左边窗口" })
