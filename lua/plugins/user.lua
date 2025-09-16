@@ -45,6 +45,9 @@ vim.keymap.set("n", "ej", "<C-w>j", { desc = "切换到下边窗口" })
 vim.keymap.set("n", "ek", "<C-w>k", { desc = "切换到上边窗口" })
 vim.keymap.set("n", "<Space>bn", ":bnext<CR>", { noremap = true, silent = true })
 
+require("luasnip").filetype_extend("typescript", { "javascript" })
+require("luasnip.loaders.from_vscode").lazy_load()
+
 ---@type LazySpec
 return {
 
@@ -85,18 +88,6 @@ return {
 
   -- You can disable default plugins as follows:
   { "max397574/better-escape.nvim", enabled = false },
-
-  -- You can also easily customize additional setup of plugins that is outside of the plugin's setup call
-  {
-    "L3MON4D3/LuaSnip",
-    config = function(plugin, opts)
-      require "astronvim.plugins.configs.luasnip"(plugin, opts) -- include the default astronvim config that calls the setup call
-      -- add more custom luasnip configuration such as filetype extend or custom snippets
-      local luasnip = require "luasnip"
-      luasnip.filetype_extend("javascript", { "javascriptreact" })
-    end,
-  },
-
   {
     "windwp/nvim-autopairs",
     config = function(plugin, opts)
