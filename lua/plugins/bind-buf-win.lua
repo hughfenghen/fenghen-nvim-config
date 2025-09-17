@@ -1,0 +1,127 @@
+-- 文件: lua/plugins/bufwin_bind.lua
+local M = {
+  buf_to_win = {}, -- bufnr -> winid
+  win_last_buf = {}, -- winid -> last bufnr (用于恢复)
+  skip_bufenter = false,
+  in_restore = false,
+}
+
+local api = vim.api
+
+-- ---------- 工具函数 ----------
+local function is_floating(winid)
+  if not winid or not api.nvim_win_is_valid(winid) then return false end
+  local ok, cfg = pcall(api.nvim_win_get_config, winid)
+  if not ok or not cfg then return false end
+  return cfg.relative and cfg.relative ~= ""
+end
+
+-- ---------- 自动命令 ----------
+-- 记录窗口离开时的 buffer
+api.nvim_create_autocmd("BufLeave", {
+  callback = function(args)
+    local win = api.nvim_get_current_win()
+    if is_floating(win) then return end
+    M.win_last_buf[win] = args.buf
+  end,
+})
+
+-- 窗口进入：标记跨窗口跳转
+api.nvim_create_autocmd("WinEnter", {
+  callback = function() M.skip_bufenter = true end,
+})
+
+-- 窗口关闭：清理绑定
+api.nvim_create_autocmd("WinClosed", {
+  callback = function(args)
+    local closed_winid = tonumber(args.match)
+    for b, w in pairs(M.buf_to_win) do
+      if w == closed_winid then M.buf_to_win[b] = nil end
+    end
+  end,
+})
+
+-- BufEnter 主逻辑
+api.nvim_create_autocmd("BufEnter", {
+  callback = function(args)
+    if M.in_restore then return end
+    if M.skip_bufenter then
+      M.skip_bufenter = false
+      return
+    end
+
+    local bufnr = args.buf
+    local target_win = M.buf_to_win[bufnr]
+    if not target_win or not api.nvim_win_is_valid(target_win) then return end
+
+    local curwin = api.nvim_get_current_win()
+
+    -- 跳过浮动窗口
+    local cfg = api.nvim_win_get_config(curwin)
+    if cfg and cfg.relative and cfg.relative ~= "" then return end
+
+    -- 当前就是目标窗口
+    if curwin == target_win then
+      if api.nvim_win_get_buf(curwin) ~= bufnr then
+        M.in_restore = true
+        pcall(api.nvim_win_set_buf, curwin, bufnr)
+        M.in_restore = false
+      end
+      return
+    end
+
+    -- 恢复当前窗口原来的 buffer
+    local prev_buf = M.win_last_buf[curwin]
+    if not prev_buf or not api.nvim_buf_is_valid(prev_buf) then
+      prev_buf = api.nvim_create_buf(false, true)
+      pcall(api.nvim_buf_set_name, prev_buf, "scratch")
+    end
+
+    M.in_restore = true
+    pcall(api.nvim_win_set_buf, curwin, prev_buf)
+
+    if api.nvim_win_is_valid(target_win) then
+      pcall(api.nvim_set_current_win, target_win)
+      if api.nvim_win_get_buf(target_win) ~= bufnr then pcall(api.nvim_win_set_buf, target_win, bufnr) end
+    end
+
+    M.in_restore = false
+  end,
+})
+
+-- ---------- 绑定逻辑 ----------
+function M.bind_buffer_window(bufnr, winid)
+  bufnr = bufnr or api.nvim_get_current_buf()
+  winid = winid or api.nvim_get_current_win()
+
+  -- 单 buffer 只允许绑定一个窗口：先解绑
+  for b, w in pairs(M.buf_to_win) do
+    if b == bufnr then M.buf_to_win[b] = nil end
+  end
+
+  M.buf_to_win[bufnr] = winid
+  vim.notify(string.format("已绑定 buffer %d 到窗口 %d", bufnr, winid))
+
+  -- buffer 被卸载时清理
+  api.nvim_create_autocmd({ "BufWipeout", "BufUnload", "BufDelete" }, {
+    buffer = bufnr,
+    once = true,
+    callback = function() M.buf_to_win[bufnr] = nil end,
+  })
+end
+
+-- ---------- 用户命令 ----------
+api.nvim_create_user_command("BindBufWin", function(opts)
+  if opts and opts.args and opts.args ~= "" then
+    local b = tonumber(opts.args)
+    if b then
+      M.bind_buffer_window(b, nil)
+      return
+    end
+  end
+  M.bind_buffer_window()
+end, { desc = "绑定当前 buffer 到当前窗口（BindBufWin [bufnr]）", nargs = "?" })
+
+vim.keymap.set("n", "<Space>bf", ":BindBufWin<CR>", { noremap = true, silent = true })
+
+return {}
