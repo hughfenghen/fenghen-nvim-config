@@ -9,17 +9,15 @@ return {
     opts = {
       -- Make sure to use the names found in `:Mason`
       ensure_installed = {
-        -- install language servers
+        "html-lsp",
+        "ast-grep",
+        "bash-language-server",
         "lua-language-server",
-
-        -- install formatters
+        "marksman",
         "stylua",
-
-        -- install debuggers
-        "debugpy",
-
-        -- install any other package
+        "tailwindcss-language-server",
         "tree-sitter-cli",
+        "typescript-language-server",
       },
     },
   },

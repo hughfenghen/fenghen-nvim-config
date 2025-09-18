@@ -9,6 +9,7 @@
 -- vim.keymap.set("n", "<leader>pk", "<cmd>Telescope keymaps<CR>", { desc = "Keymaps" })
 
 vim.o.autowriteall = true
+vim.opt.autoread = true
 
 local function feedkeys(keys)
   local termcodes = vim.api.nvim_replace_termcodes(keys, true, false, true)

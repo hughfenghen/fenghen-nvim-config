@@ -110,6 +110,18 @@ function M.bind_buffer_window(bufnr, winid)
   })
 end
 
+function M.unbind_buffer_window(bufnr)
+  bufnr = bufnr or api.nvim_get_current_buf()
+  local winid = M.buf_to_win[bufnr]
+  if winid and api.nvim_win_is_valid(winid) then
+    M.buf_to_win[bufnr] = nil
+    vim.notify(string.format("已取消 buffer %d 的窗口绑定", bufnr))
+  else
+    if M.buf_to_win[bufnr] then M.buf_to_win[bufnr] = nil end
+    vim.notify(string.format("Buffer %d 没有有效窗口绑定", bufnr), vim.log.levels.WARN)
+  end
+end
+
 -- ---------- 用户命令 ----------
 api.nvim_create_user_command("BindBufWin", function(opts)
   if opts and opts.args and opts.args ~= "" then
@@ -122,6 +134,18 @@ api.nvim_create_user_command("BindBufWin", function(opts)
   M.bind_buffer_window()
 end, { desc = "绑定当前 buffer 到当前窗口（BindBufWin [bufnr]）", nargs = "?" })
 
+api.nvim_create_user_command("UnBindBufWin", function(opts)
+  if opts and opts.args and opts.args ~= "" then
+    local b = tonumber(opts.args)
+    if b then
+      M.unbind_buffer_window(b)
+      return
+    end
+  end
+  M.unbind_buffer_window()
+end, { desc = "取消 buffer 的窗口绑定（UnBindBufWin [bufnr]）", nargs = "?" })
+
 vim.keymap.set("n", "<Space>bf", ":BindBufWin<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "<Space>buf", ":UnBindBufWin<CR>", { noremap = true, silent = true })
 
 return {}

@@ -26,6 +26,8 @@ return {
 
     -- Disable and enable cursors.
     set({ "n", "x" }, "<c-q>", mc.toggleCursor)
+    set("x", "I", mc.insertVisual)
+    set("x", "A", mc.appendVisual)
 
     -- Mappings defined in a keymap layer only apply when there are
     -- multiple cursors. This lets you have overlapping mappings.
