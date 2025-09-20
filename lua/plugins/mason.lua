@@ -18,6 +18,7 @@ return {
         "tailwindcss-language-server",
         "tree-sitter-cli",
         "typescript-language-server",
+        "css-lsp",
       },
     },
   },
