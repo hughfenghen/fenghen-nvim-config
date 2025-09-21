@@ -53,9 +53,21 @@ return {
       },
     },
     zen = {
-      on_open = function()
+      on_open = function(win)
+        -- 初始设置
         vim.wo.number = true
         vim.wo.relativenumber = true
+
+        -- 监听 buffer 切换事件
+        vim.api.nvim_create_autocmd("BufWinEnter", {
+          group = win.augroup,
+          callback = function()
+            if win:win_valid() then
+              vim.wo[win.win].number = true
+              vim.wo[win.win].relativenumber = true
+            end
+          end,
+        })
       end,
     },
   },
@@ -139,12 +151,12 @@ return {
     -- { "<leader>.", function() Snacks.scratch() end, desc = "Toggle Scratch Buffer" },
     {
       "_",
-      function() require("plugins.my-scratch").new_scratch(filetypes) end,
+      function() require("utils.my-scratch").new_scratch(filetypes) end,
       desc = "Toggle Scratch Buffer",
     },
     {
       "-",
-      function() require("plugins.my-scratch").select_scratch() end,
+      function() require("utils.my-scratch").select_scratch() end,
       desc = "Select Scratch Buffer",
     },
     -- { "<leader>S", function() Snacks.scratch.select() end, desc = "Select Scratch Buffer" },
