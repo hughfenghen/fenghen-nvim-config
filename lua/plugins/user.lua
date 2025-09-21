@@ -5,6 +5,9 @@ vim.opt.iskeyword:append "-"
 
 vim.opt.ttyfast = true
 
+require "utils.my-keyshort"
+require "utils.my-auto-saveread"
+
 ---@type LazySpec
 return {
   -- == Examples of Adding Plugins ==

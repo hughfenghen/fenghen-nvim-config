@@ -54,6 +54,12 @@ return {
     },
     zen = {
       on_open = function(win)
+        -- 移除自动退出的 autocmd
+        vim.api.nvim_clear_autocmds {
+          group = win.augroup,
+          event = "WinEnter",
+        }
+
         -- 初始设置
         vim.wo.number = true
         vim.wo.relativenumber = true

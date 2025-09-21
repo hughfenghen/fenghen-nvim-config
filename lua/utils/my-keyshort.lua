@@ -134,3 +134,5 @@ vim.keymap.set("n", "<Tab>", function()
     end,
   }
 end, { desc = "Switch buffers" })
+
+return {}
