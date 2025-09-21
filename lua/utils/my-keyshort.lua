@@ -1,6 +1,8 @@
 vim.keymap.set("n", "<C-I>", "<C-I>", { desc = "Jump forward in jumplist" })
 vim.keymap.set("n", "<C-O>", "<C-O>", { desc = "Jump backward in jumplist" })
 
+vim.keymap.set("n", "/", function() Snacks.picker.lines() end, { desc = "Buffer Lines" })
+
 vim.keymap.set(
   "n",
   "<leader>gq",
