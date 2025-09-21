@@ -50,11 +50,12 @@ vim.keymap.set("n", "<Space>bn", ":bnext<CR>", { noremap = true, silent = true }
 -- Tab 显示 buffer 列表
 vim.keymap.set("n", "<Tab>", function()
   Snacks.picker.buffers {
-    sort_lastused = true, -- 修正：使用正确的配置项名称
-    current = false, -- 修正：使用 current = false 来忽略当前缓冲区
+    sort_lastused = true,
+    current = false,
     prompt = "Switch Buffer",
     jump = {
       match = false, -- 禁用匹配位置跳转
+      frecency = true,
     },
     win = {
       input = {

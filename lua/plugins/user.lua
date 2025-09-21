@@ -5,10 +5,6 @@ vim.opt.iskeyword:append "-"
 
 vim.opt.ttyfast = true
 
-require("luasnip").filetype_extend("typescript", { "javascript" })
-require("luasnip").filetype_extend("typescriptreact", { "javascript" })
-require("luasnip.loaders.from_vscode").lazy_load()
-
 ---@type LazySpec
 return {
   -- == Examples of Adding Plugins ==
