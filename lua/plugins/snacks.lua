@@ -1,3 +1,6 @@
+---@module 'snacks.meta.types'
+-- luacheck: globals vim
+
 local filetypes = {
   { text = "typescript" },
   { text = "markdown" },

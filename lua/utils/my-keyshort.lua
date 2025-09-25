@@ -1,7 +1,27 @@
+---@module 'snacks.meta.types'
+
 vim.keymap.set("n", "<C-I>", "<C-I>", { desc = "Jump forward in jumplist" })
 vim.keymap.set("n", "<C-O>", "<C-O>", { desc = "Jump backward in jumplist" })
 
-vim.keymap.set("n", "/", function() Snacks.picker.lines() end, { desc = "Buffer Lines" })
+-- 合并 buflines 跟 search 的效果
+vim.keymap.set("n", "/", function()
+  local input_text = ""
+
+  Snacks.picker.lines {
+    matcher = { fuzzy = false },
+    on_change = function(picker)
+      -- 保存当前输入的搜索文本
+      input_text = picker.input:get()
+    end,
+    on_close = function()
+      -- picker 关闭时，将搜索文本设置到 Vim 的搜索寄存器
+      if input_text and input_text ~= "" then
+        vim.fn.setreg("/", input_text)
+        vim.o.hlsearch = true
+      end
+    end,
+  }
+end, { desc = "Buffer Lines" })
 
 vim.keymap.set(
   "n",
