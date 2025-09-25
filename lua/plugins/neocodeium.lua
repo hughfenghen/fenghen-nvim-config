@@ -12,7 +12,7 @@ return {
   keys = {
     -- 接受整个建议
     {
-      "<C-e>",
+      "<A-.>",
       function() require("neocodeium").accept() end,
       mode = "i",
       desc = "Accept suggestion",
@@ -52,7 +52,6 @@ return {
       mode = "i",
       desc = "Clear suggestions",
     },
-    -- 手动完成（保留原有的）
     {
       "<C-.>",
       function() require("neocodeium").cycle_or_complete() end,

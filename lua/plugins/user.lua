@@ -2,11 +2,13 @@
 -- PLEASE REMOVE THE EXAMPLES YOU HAVE NO INTEREST IN BEFORE ENABLING THIS FILE
 
 vim.opt.iskeyword:append "-"
+vim.opt.equalalways = false
 
 vim.opt.ttyfast = true
 
 require "utils.my-keyshort"
 require "utils.my-auto-saveread"
+require "utils.my-auto-fixwin"
 
 ---@type LazySpec
 return {
@@ -15,7 +17,12 @@ return {
   {
     "ray-x/lsp_signature.nvim",
     event = "BufRead",
-    config = function() require("lsp_signature").setup() end,
+    config = function()
+      require("lsp_signature").setup {
+        debug = false, -- 禁用调试日志
+        verbose = false, -- 禁用详细输出
+      }
+    end,
   },
   -- == Examples of Overriding Plugins ==
   -- customize dashboard options

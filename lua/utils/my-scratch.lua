@@ -63,8 +63,11 @@ function M.select_scratch()
         M.select_scratch()
       end,
     },
-    confirm = function(_, item)
-      if item then Snacks.scratch.open { icon = item.icon, file = item.file, name = item.name, ft = item.ft } end
+    confirm = function(picker, item)
+      if item then
+        Snacks.scratch.open { icon = item.icon, file = item.file, name = item.name, ft = item.ft }
+        picker:close()
+      end
     end,
   }
 end

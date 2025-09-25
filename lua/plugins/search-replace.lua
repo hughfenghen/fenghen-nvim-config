@@ -8,7 +8,7 @@ return {
     }
   end,
   keys = {
-    { "<leader>sf", "<CMD>SearchReplaceSingleBufferOpen<CR>", desc = "Search Replace in file" },
-    { "<leader>sd", "<CMD>SearchReplaceSingleBufferCWord<CR>", desc = "Replace Word in file" },
+    -- { "<leader>sf", "<CMD>SearchReplaceSingleBufferOpen<CR>", desc = "Search Replace in file" },
+    -- { "<leader>sd", "<CMD>SearchReplaceSingleBufferCWord<CR>", desc = "Replace Word in file" },
   },
 }

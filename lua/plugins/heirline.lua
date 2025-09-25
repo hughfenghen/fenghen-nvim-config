@@ -36,6 +36,8 @@ return {
 
     -- 2. 把默认 winbar 禁用
     opts.winbar = nil
+    -- 禁用 折叠 指示器
+    vim.opt.foldcolumn = "0"
 
     -- 3. 把 NeoCodeium 组件加到 statusline 右侧
     table.insert(opts.statusline, NeoCodeium)
