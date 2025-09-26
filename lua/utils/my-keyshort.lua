@@ -5,15 +5,10 @@ vim.keymap.set("n", "<C-O>", "<C-O>", { desc = "Jump backward in jumplist" })
 
 -- 合并 buflines 跟 search 的效果
 vim.keymap.set("n", "/", function()
-  local input_text = ""
-
   Snacks.picker.lines {
     matcher = { fuzzy = false },
-    on_change = function(picker)
-      -- 保存当前输入的搜索文本
-      input_text = picker.input:get()
-    end,
-    on_close = function()
+    on_close = function(picker)
+      local input_text = picker.input:get()
       -- picker 关闭时，将搜索文本设置到 Vim 的搜索寄存器
       if input_text and input_text ~= "" then
         vim.fn.setreg("/", input_text)
@@ -22,20 +17,6 @@ vim.keymap.set("n", "/", function()
     end,
   }
 end, { desc = "Buffer Lines" })
-
-vim.keymap.set(
-  "n",
-  "<leader>gq",
-  function() require("gitsigns").setqflist(0) end,
-  { desc = "Add current git changes to quickfix list" }
-)
-
-vim.keymap.set(
-  "n",
-  "<leader>gQ",
-  function() require("gitsigns").setqflist "all" end,
-  { desc = "Add all git changes to quickfix list" }
-)
 
 local function feedkeys(keys)
   local termcodes = vim.api.nvim_replace_termcodes(keys, true, false, true)

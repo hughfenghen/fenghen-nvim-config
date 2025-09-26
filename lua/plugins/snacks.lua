@@ -32,6 +32,7 @@ return {
       timeout = 3000,
     },
     picker = {
+
       enabled = true,
       previewers = {
         git = {
@@ -48,7 +49,17 @@ return {
       notification = {
         -- wo = { wrap = true } -- Wrap notifications
       },
+      snacks_image = {
+        relative = "cursor",
+        border = "rounded",
+        focusable = false,
+        backdrop = false,
+        row = 1,
+        col = 1,
+        zindex = 1,
+      },
     },
+    image = { enabled = true },
     win = {
       wo = {
         wrap = true,
@@ -234,6 +245,8 @@ return {
         Snacks.toggle.inlay_hints():map "<leader>uh"
         Snacks.toggle.indent():map "<leader>ug"
         Snacks.toggle.dim():map "<leader>uD"
+
+        vim.keymap.del("n", "<leader>h")
       end,
     })
   end,
