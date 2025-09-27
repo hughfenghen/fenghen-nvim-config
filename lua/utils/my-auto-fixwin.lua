@@ -20,7 +20,7 @@ vim.api.nvim_create_autocmd({ "WinNew", "WinClosed" }, {
 
       if leftmost_win then
         vim.api.nvim_set_option_value("winfixwidth", true, { win = leftmost_win })
-        vim.api.nvim_win_set_width(leftmost_win, 70)
+        vim.api.nvim_win_set_width(leftmost_win, 65)
       end
     end
   end,

@@ -246,6 +246,7 @@ return {
         Snacks.toggle.indent():map "<leader>ug"
         Snacks.toggle.dim():map "<leader>uD"
 
+        -- 删除快捷键，改快捷键指向 home screen，导致插件报错
         vim.keymap.del("n", "<leader>h")
       end,
     })

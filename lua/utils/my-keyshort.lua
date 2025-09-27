@@ -3,6 +3,9 @@
 vim.keymap.set("n", "<C-I>", "<C-I>", { desc = "Jump forward in jumplist" })
 vim.keymap.set("n", "<C-O>", "<C-O>", { desc = "Jump backward in jumplist" })
 
+vim.keymap.set("i", "<C-A>", "<C-o>^", { desc = "Move to beginning of line" })
+vim.keymap.set("i", "<C-E>", "<End>", { desc = "Move to end of line" })
+
 -- 合并 buflines 跟 search 的效果
 vim.keymap.set("n", "/", function()
   Snacks.picker.lines {
@@ -40,13 +43,14 @@ vim.keymap.set("n", "<S-Enter>", function()
 end, { noremap = true, silent = true, desc = "从当前光标断行" })
 -- vim.keymap.set("n", "<S-Enter>", "i<Enter><Esc>", { noremap = true, silent = true, desc = "从当前光标断行" })
 
+-- 终端中 esc 退出编辑模式
 vim.keymap.set("t", "<Esc>", [[<C-\><C-n>]])
--- 窗口切换：cmd + h/j/k/l
+-- 窗口切换：h/j/k/l
 vim.keymap.set("n", "eh", "<C-w>h", { desc = "切换到左边窗口" })
 vim.keymap.set("n", "el", "<C-w>l", { desc = "切换到右边窗口" })
 vim.keymap.set("n", "ej", "<C-w>j", { desc = "切换到下边窗口" })
 vim.keymap.set("n", "ek", "<C-w>k", { desc = "切换到上边窗口" })
-vim.keymap.set("n", "<Space>bn", ":bnext<CR>", { noremap = true, silent = true })
+vim.keymap.set("n", "ew", "<C-w>w", { desc = "切换到浮动窗口" })
 
 -- vim.api.nvim_set_keymap("n", "<S-Tab>", ":bprev<CR>", { noremap = true })
 -- vim.api.nvim_set_keymap("n", "<Tab>", ":bnext<CR>", { noremap = true })
