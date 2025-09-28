@@ -1,10 +1,14 @@
 ---@module 'snacks.meta.types'
 
+-- 避免C-I 输入 tab
 vim.keymap.set("n", "<C-I>", "<C-I>", { desc = "Jump forward in jumplist" })
 vim.keymap.set("n", "<C-O>", "<C-O>", { desc = "Jump backward in jumplist" })
 
-vim.keymap.set("i", "<C-A>", "<C-o>^", { desc = "Move to beginning of line" })
-vim.keymap.set("i", "<C-E>", "<End>", { desc = "Move to end of line" })
+-- 插入模式 与命令行模式保持一致 在行内快速移动光标
+vim.keymap.set("i", "<C-A>", "<C-o>^", { desc = "移动到行首" })
+vim.keymap.set("i", "<C-E>", "<End>", { desc = "移动到行尾" })
+vim.keymap.set("i", "<C-B>", "<C-o>b", { desc = "向后移动一个单词" })
+vim.keymap.set("i", "<C-F>", "<C-o>w", { desc = "向前移动一个单词" })
 
 -- 合并 buflines 跟 search 的效果
 vim.keymap.set("n", "/", function()
@@ -34,6 +38,7 @@ vim.keymap.set("n", "<Enter>", function()
   end
 end, { noremap = true, silent = true, desc = "插入新行" })
 
+-- 在可编辑窗口使用 enter 快速断行
 vim.keymap.set("n", "<S-Enter>", function()
   if vim.bo.modifiable and not vim.bo.readonly then
     feedkeys "i<Enter><Esc>"
@@ -41,7 +46,6 @@ vim.keymap.set("n", "<S-Enter>", function()
     feedkeys "<S-Enter>"
   end
 end, { noremap = true, silent = true, desc = "从当前光标断行" })
--- vim.keymap.set("n", "<S-Enter>", "i<Enter><Esc>", { noremap = true, silent = true, desc = "从当前光标断行" })
 
 -- 终端中 esc 退出编辑模式
 vim.keymap.set("t", "<Esc>", [[<C-\><C-n>]])
@@ -52,9 +56,7 @@ vim.keymap.set("n", "ej", "<C-w>j", { desc = "切换到下边窗口" })
 vim.keymap.set("n", "ek", "<C-w>k", { desc = "切换到上边窗口" })
 vim.keymap.set("n", "ew", "<C-w>w", { desc = "切换到浮动窗口" })
 
--- vim.api.nvim_set_keymap("n", "<S-Tab>", ":bprev<CR>", { noremap = true })
--- vim.api.nvim_set_keymap("n", "<Tab>", ":bnext<CR>", { noremap = true })
--- Tab 显示 buffer 列表
+-- Tab 显示 buffer 列表，重定义窗口显示内容，高亮并对齐文件名
 vim.keymap.set("n", "<Tab>", function()
   Snacks.picker.buffers {
     sort_lastused = true,

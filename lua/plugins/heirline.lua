@@ -33,14 +33,39 @@ return {
       end,
       hl = { fg = "yellow" },
     }
+    table.insert(opts.statusline, NeoCodeium)
 
-    -- 2. 把默认 winbar 禁用
+    local utils = require "heirline.utils"
+    local conditions = require "heirline.conditions"
+
+    -- 状态栏显示文件路径
+    local FileNameBlock = {
+      init = function(self) self.filename = vim.api.nvim_buf_get_name(0) end,
+    }
+    local FileName = {
+      provider = function(self)
+        local filename = vim.fn.fnamemodify(self.filename, ":.")
+        if filename == "" then return "[No Name]" end
+        if not conditions.width_percent_below(#filename, 0.25) then filename = vim.fn.pathshorten(filename, 3) end
+        return filename
+      end,
+      hl = { fg = utils.get_highlight("Directory").fg },
+    }
+
+    FileNameBlock = utils.insert(FileNameBlock, FileName)
+    local insert_position = #opts.statusline + 1 -- 默认插入到末尾
+    for i, component in ipairs(opts.statusline) do
+      if component.provider == "%=" then
+        insert_position = i
+        break
+      end
+    end
+    table.insert(opts.statusline, insert_position, FileNameBlock)
+
+    -- 禁用符号面包屑
     opts.winbar = nil
     -- 禁用 折叠 指示器
     vim.opt.foldcolumn = "0"
-
-    -- 3. 把 NeoCodeium 组件加到 statusline 右侧
-    table.insert(opts.statusline, NeoCodeium)
 
     return opts
   end,
