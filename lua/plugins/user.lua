@@ -1,14 +1,18 @@
 -- You can also add or configure plugins by creating files in this `plugins/` folder
 -- PLEASE REMOVE THE EXAMPLES YOU HAVE NO INTEREST IN BEFORE ENABLING THIS FILE
 
-vim.opt.iskeyword:append "-"
-vim.opt.equalalways = false
-
-vim.opt.ttyfast = true
-
 require "utils.my-keyshort"
 require "utils.my-auto-saveread"
 require "utils.my-auto-fixwin"
+
+vim.opt.iskeyword:append "-"
+vim.opt.equalalways = false
+vim.opt.ttyfast = true
+
+vim.env.http_proxy = "http://127.0.0.1:1199"
+vim.env.https_proxy = "http://127.0.0.1:1199"
+vim.env.HTTP_PROXY = "http://127.0.0.1:1199"
+vim.env.HTTPS_PROXY = "http://127.0.0.1:1199"
 
 ---@type LazySpec
 return {
