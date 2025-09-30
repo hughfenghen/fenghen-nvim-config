@@ -62,6 +62,15 @@ return {
     end
     table.insert(opts.statusline, insert_position, FileNameBlock)
 
+    local Clock = {
+      provider = function() return os.date "🕑%H:%M" end,
+      update = function()
+        return true -- 总是更新
+      end,
+    }
+
+    table.insert(opts.statusline, Clock)
+
     -- 禁用符号面包屑
     opts.winbar = nil
     -- 禁用 折叠 指示器

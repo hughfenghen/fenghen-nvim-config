@@ -31,13 +31,6 @@ return {
       mode = "i",
       desc = "Accept line",
     },
-    -- 下一个建议
-    {
-      "<A-e>",
-      function() require("neocodeium").cycle_or_complete() end,
-      mode = "i",
-      desc = "Next suggestion",
-    },
     -- 上一个建议
     {
       "<A-r>",
@@ -45,18 +38,19 @@ return {
       mode = "i",
       desc = "Previous suggestion",
     },
-    -- 清除建议
-    {
-      "<A-c>",
-      function() require("neocodeium").clear() end,
-      mode = "i",
-      desc = "Clear suggestions",
-    },
+    -- 下一个建议
     {
       "<C-.>",
       function() require("neocodeium").cycle_or_complete() end,
       mode = "i",
       desc = "Manual complete",
     },
+    -- 清除建议
+    -- {
+    --   "<A-c>",
+    --   function() require("neocodeium").clear() end,
+    --   mode = "i",
+    --   desc = "Clear suggestions",
+    -- },
   },
 }

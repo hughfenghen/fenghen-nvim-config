@@ -5,7 +5,7 @@ return {
   config = function()
     -- macOS 配置
     if vim.fn.has "mac" == 1 then
-      vim.g.im_select_get_im_cmd = { "im-select" }
+      vim.g.im_select_get_im_cmd = { "macism" }
       vim.g.im_select_default = "com.apple.keylayout.ABC"
     -- Windows 配置
     elseif vim.fn.has "win32" == 1 then
