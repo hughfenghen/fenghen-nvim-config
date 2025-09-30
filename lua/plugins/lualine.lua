@@ -35,6 +35,8 @@ return {
       -- 如果路径太长，缩短显示
       local max_length = math.floor(vim.o.columns * 0.25)
       if #filename > max_length then filename = vim.fn.pathshorten(filename, 3) end
+
+      if vim.bo.modified then filename = filename .. " *" end
       return filename
     end
 
@@ -42,11 +44,11 @@ return {
     local function clock() return os.date "🕑%H:%M" end
 
     -- 修复滚动后高亮状态消失，导致不显示匹配数量
-    vim.api.nvim_create_autocmd("WinScrolled", {
-      callback = function()
-        if vim.fn.getreg "/" ~= "" and vim.v.hlsearch == 0 then vim.opt.hlsearch = true end
-      end,
-    })
+    -- vim.api.nvim_create_autocmd("WinScrolled", {
+    --   callback = function()
+    --     if vim.fn.getreg "/" ~= "" and vim.v.hlsearch == 0 then vim.opt.hlsearch = true end
+    --   end,
+    -- })
 
     local function search_cnt()
       if vim.v.hlsearch == 0 then return "" end
@@ -120,26 +122,5 @@ return {
 
     -- 禁用折叠指示器（对应您的 vim.opt.foldcolumn = "0"）
     vim.opt.foldcolumn = "0"
-
-    vim.o.winbar = "" -- 设置全局默认值
-    -- 确保所有窗口都不显示
-    vim.api.nvim_create_autocmd({ "BufWinEnter", "WinEnter" }, {
-      callback = function() vim.wo.winbar = "" end,
-    })
-
-    vim.api.nvim_create_autocmd({ "OptionSet" }, {
-      pattern = "winbar",
-      callback = function()
-        local info = debug.getinfo(2, "S")
-        print("winbar changed by:", info.source, "line:", info.currentline)
-        print("new value:", vim.wo.winbar)
-      end,
-    })
-
-    -- 设置自动命令以更新 NeoCodeium 状态
-    -- vim.api.nvim_create_autocmd("User", {
-    --   pattern = { "NeoCodeiumServer*", "NeoCodeium*Enabled", "NeoCodeium*Disabled" },
-    --   callback = function() require("lualine").refresh() end,
-    -- })
   end,
 }

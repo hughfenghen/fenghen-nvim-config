@@ -32,11 +32,11 @@ end
 
 vim.keymap.set("n", "<Enter>", function()
   if vim.bo.modifiable and not vim.bo.readonly then
-    feedkeys "o<Esc>"
+    feedkeys "a <Esc>"
   else
     feedkeys "<Enter>"
   end
-end, { noremap = true, silent = true, desc = "插入新行" })
+end, { noremap = true, silent = true, desc = "插入空格" })
 
 -- 在可编辑窗口使用 enter 快速断行
 vim.keymap.set("n", "<S-Enter>", function()

@@ -32,11 +32,17 @@ return {
       timeout = 3000,
     },
     picker = {
-
       enabled = true,
       previewers = {
         git = {
           native = true,
+        },
+      },
+      win = {
+        input = {
+          keys = {
+            ["<c-a>"] = false, -- 禁用输入窗口中的 Ctrl+A
+          },
         },
       },
     },
