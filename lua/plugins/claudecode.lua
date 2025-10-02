@@ -1,12 +1,15 @@
 return {
   "coder/claudecode.nvim",
   dependencies = { "folke/snacks.nvim" },
-  enabled = false,
+  -- enabled = false,
   config = true,
   opts = {
     terminal = {
       split_side = "left", -- 从左侧弹出
       split_width_percentage = 0.2,
+    },
+    diff_opts = {
+      vertical_split = false, -- 使用水平分割
     },
   },
   keys = {

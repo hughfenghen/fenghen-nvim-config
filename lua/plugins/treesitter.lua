@@ -15,6 +15,7 @@ return {
       "css",
       "html",
       "javascript",
+      "typescript",
       "json",
       "lua",
       "python",

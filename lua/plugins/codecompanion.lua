@@ -4,7 +4,7 @@ return {
     "nvim-lua/plenary.nvim",
     "nvim-treesitter/nvim-treesitter",
   },
-  -- ebabled = false,
+  enabled = false,
   config = function(_, opts)
     require("codecompanion").setup(opts)
     -- AI 插件快捷键
@@ -41,8 +41,8 @@ return {
 
     strategies = {
       chat = {
-        -- adapter = "claude_code",
-        adapter = "GLM_OPENAI",
+        adapter = "claude_code",
+        -- adapter = "GLM_OPENAI",
         tools = {
           opts = {
             system_prompt = {
@@ -60,10 +60,12 @@ return {
         },
       },
       inline = {
-        adapter = "GLM_OPENAI",
+        adapter = "claude_code",
+        -- adapter = "GLM_OPENAI",
       },
-      command = {
-        adapter = "GLM_OPENAI",
+      cmd = {
+        adapter = "claude_code",
+        -- adapter = "GLM_OPENAI",
       },
     },
     adapters = {
