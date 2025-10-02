@@ -1,1 +1,5 @@
-return { "RaafatTurki/hex.nvim", config = function() require("hex").setup() end }
+return {
+  "RaafatTurki/hex.nvim",
+  event = "VeryLazy",
+  config = function() require("hex").setup() end,
+}

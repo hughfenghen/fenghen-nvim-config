@@ -1,7 +1,7 @@
 return {
   "MeanderingProgrammer/render-markdown.nvim",
   dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-mini/mini.icons" },
-  ft = { "markdown" },
+  ft = { "markdown", "codecompanion" },
   config = function()
     ------------ markdown style ------------
     -- 红色加粗 bold = true,

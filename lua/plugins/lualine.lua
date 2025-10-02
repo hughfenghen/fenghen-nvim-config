@@ -122,5 +122,6 @@ return {
 
     -- 禁用折叠指示器（对应您的 vim.opt.foldcolumn = "0"）
     vim.opt.foldcolumn = "0"
+    vim.o.statuscolumn = ""
   end,
 }
