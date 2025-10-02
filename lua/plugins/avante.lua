@@ -1,9 +1,8 @@
-if true then return {} end -- WARN: REMOVE THIS LINE TO ACTIVATE THIS FILE
-
 return {
   "yetone/avante.nvim",
   -- if you want to build from source then do `make BUILD_FROM_SOURCE=true`
   -- ⚠️ must add this setting! ! !
+  enabled = false,
   build = vim.fn.has "win32" ~= 0 and "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false"
     or "make",
   event = "VeryLazy",
@@ -13,42 +12,52 @@ return {
   opts = {
     -- add any opts here
     -- this file can contain specific instructions for your project
-    instructions_file = "avante.md",
+    instructions_file = "CLAUDE.md",
     -- for example
     provider = "claude",
+    -- provider = "claude-code",
     providers = {
       claude = {
-        endpoint = "https://api.anthropic.com",
-        model = "claude-sonnet-4-20250514",
+        endpoint = "https://open.bigmodel.cn/api/anthropic",
+        model = "GLM-4.6",
         timeout = 30000, -- Timeout in milliseconds
         extra_request_body = {
           temperature = 0.75,
           max_tokens = 20480,
         },
       },
-      moonshot = {
-        endpoint = "https://api.moonshot.ai/v1",
-        model = "kimi-k2-0711-preview",
-        timeout = 30000, -- Timeout in milliseconds
-        extra_request_body = {
-          temperature = 0.75,
-          max_tokens = 32768,
+    },
+    acp_providers = {
+      ["claude-code"] = {
+        command = "npx",
+        args = { "acp-claude-code" },
+        env = {
+          NODE_NO_WARNINGS = "1",
+          ANTHROPIC_API_KEY = os.getenv "ANTHROPIC_API_KEY",
+          ANTHROPIC_BASE_URL = os.getenv "ANTHROPIC_BASE_URL",
+          ACP_PATH_TO_CLAUDE_CODE_EXECUTABLE = vim.fn.exepath "claude",
+          ACP_PERMISSION_MODE = "bypassPermissions",
         },
       },
+    },
+
+    windows = {
+      position = "left", -- 改为 "left" 从左侧弹出
+      width = 70,
     },
   },
   dependencies = {
     "nvim-lua/plenary.nvim",
     "MunifTanjim/nui.nvim",
     --- The below dependencies are optional,
-    "echasnovski/mini.pick", -- for file_selector provider mini.pick
-    "nvim-telescope/telescope.nvim", -- for file_selector provider telescope
-    "hrsh7th/nvim-cmp", -- autocompletion for avante commands and mentions
-    "ibhagwan/fzf-lua", -- for file_selector provider fzf
-    "stevearc/dressing.nvim", -- for input provider dressing
+    -- "echasnovski/mini.pick", -- for file_selector provider mini.pick
+    -- "nvim-telescope/telescope.nvim", -- for file_selector provider telescope
+    -- "hrsh7th/nvim-cmp", -- autocompletion for avante commands and mentions
+    -- "ibhagwan/fzf-lua", -- for file_selector provider fzf
+    -- "stevearc/dressing.nvim", -- for input provider dressing
     "folke/snacks.nvim", -- for input provider snacks
-    "nvim-tree/nvim-web-devicons", -- or echasnovski/mini.icons
-    "zbirenbaum/copilot.lua", -- for providers='copilot'
+    -- "nvim-tree/nvim-web-devicons", -- or echasnovski/mini.icons
+    -- "zbirenbaum/copilot.lua", -- for providers='copilot'
     {
       -- support for image pasting
       "HakonHarnes/img-clip.nvim",
