@@ -49,12 +49,35 @@ end, { noremap = true, silent = true, desc = "从当前光标断行" })
 
 -- 终端中 esc 退出编辑模式
 vim.keymap.set("t", "<Esc>", [[<C-\><C-n>]])
+-- claude-code 中 esc 会中断任务,所以定义新快捷键返回 normal 模式
+vim.keymap.set("t", "<C-n>", [[<C-\><C-n><C-w>w]], { desc = "返回 normal 并切换到下一个窗口" })
 -- 窗口切换：h/j/k/l
 vim.keymap.set("n", "eh", "<C-w>h", { desc = "切换到左边窗口" })
 vim.keymap.set("n", "el", "<C-w>l", { desc = "切换到右边窗口" })
 vim.keymap.set("n", "ej", "<C-w>j", { desc = "切换到下边窗口" })
 vim.keymap.set("n", "ek", "<C-w>k", { desc = "切换到上边窗口" })
 vim.keymap.set("n", "ew", "<C-w>w", { desc = "切换到浮动窗口" })
+
+-- 修复默认的 gf 无法打开文件
+vim.keymap.set("n", "gf", function()
+  local file = vim.fn.expand "<cfile>"
+  -- 获取当前行和光标位置
+  local line = vim.api.nvim_get_current_line()
+  -- 找到 file 在当前行中的位置
+  local start_pos, end_pos = line:find(file, 1, true)
+  if start_pos and end_pos then
+    -- 从文件名结束位置继续匹配行列信息
+    local after = line:sub(end_pos + 1)
+    local line_col = after:match "^:(%d+:?%d*)"
+
+    if line_col then file = file .. ":" .. line_col end
+  end
+  Snacks.picker.files {
+    pattern = file,
+    follow = true,
+    auto_confirm = true,
+  }
+end, { desc = "打开文件" })
 
 -- Tab 显示 buffer 列表，重定义窗口显示内容，高亮并对齐文件名
 vim.keymap.set("n", "<Tab>", function()

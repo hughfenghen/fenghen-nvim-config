@@ -6,7 +6,7 @@ return {
   opts = {
     terminal = {
       split_side = "left", -- 从左侧弹出
-      split_width_percentage = 0.2,
+      split_width_percentage = 0.25,
     },
     diff_opts = {
       vertical_split = false, -- 使用水平分割
