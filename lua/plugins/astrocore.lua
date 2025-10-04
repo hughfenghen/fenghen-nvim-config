@@ -63,6 +63,14 @@ return {
         -- navigate buffer tabs
         ["]b"] = { function() require("astrocore.buffer").nav(vim.v.count1) end, desc = "Next buffer" },
         ["[b"] = { function() require("astrocore.buffer").nav(-vim.v.count1) end, desc = "Previous buffer" },
+        -- 忽略内置的 ToggleTerm 相关快捷键
+        ["<Leader>th"] = false,
+        ["<Leader>tl"] = false,
+        ["<Leader>tv"] = false,
+        ["<Leader>tp"] = false,
+        ["<Leader>tn"] = false,
+        -- 默认右侧打开
+        ["<C-'>"] = { "<Cmd>ToggleTerm size=80 direction=vertical<CR>", desc = "Toggle terminal" },
 
         -- mappings seen under group name "Buffer"
         -- ["<Leader>bd"] = {
@@ -80,6 +88,12 @@ return {
 
         -- setting a mapping to false will disable it
         -- ["<C-S>"] = false,
+      },
+      t = {
+        ["<C-'>"] = { "<Cmd>ToggleTerm<CR>", desc = "Toggle terminal" },
+      },
+      i = {
+        ["<C-'>"] = { "<Esc><Cmd>ToggleTerm<CR>", desc = "Toggle terminal" },
       },
     },
   },

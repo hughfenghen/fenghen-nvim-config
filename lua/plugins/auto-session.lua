@@ -5,7 +5,7 @@ return {
     require("auto-session").setup {
       log_level = "error",
       -- auto_session_suppress_dirs = { "~/", "~/Downloads", "/" },
-      allowed_dirs = { "~/my-space/*", "~/bili-space/*" },
+      allowed_dirs = { "~/my-space/*", "~/bili-space/*", "~/.config/*" },
 
       -- 关键配置：当用 nvim 打开目录时也恢复会话
       auto_session_create_enabled = true,
