@@ -8,14 +8,6 @@
 -- vim.env.HTTPS_PROXY = "http://127.0.0.1:1199"
 -- vim.env.ALL_PROXY = "socks5://127.0.0.1:1199"
 
-require "utils.my-keyshort"
-require "utils.my-auto-saveread"
-require "utils.my-auto-fixwin"
-
-vim.opt.iskeyword:append "-"
-vim.opt.equalalways = false
-vim.opt.ttyfast = true
-
 ---@type LazySpec
 return {
   -- == Examples of Adding Plugins ==

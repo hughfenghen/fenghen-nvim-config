@@ -25,3 +25,11 @@ end
 
 require "lazy_setup"
 require "polish"
+
+vim.opt.iskeyword:append "-"
+vim.opt.equalalways = false
+vim.opt.ttyfast = true
+
+require "utils.my-keyshort"
+require "utils.my-auto-saveread"
+require "utils.my-auto-fixwin"
