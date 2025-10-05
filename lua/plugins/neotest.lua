@@ -7,6 +7,19 @@ return {
     "nvim-treesitter/nvim-treesitter",
   },
   config = function()
+    local function contains_vitest_import(file_path)
+      local f = io.open(file_path, "r")
+      if not f then return false end
+      for line in f:lines() do
+        if line:find "import%.meta%.vitest" then
+          f:close()
+          return true
+        end
+      end
+      f:close()
+      return false
+    end
+
     ---@diagnostic disable-next-line: missing-fields
     require("neotest").setup {
       adapters = {
@@ -24,7 +37,7 @@ return {
             if file_path:match "%.test%.ts$" or file_path:match "%.spec%.ts$" then return true end
             -- 扩展: 允许普通源码文件也包含测试
             if file_path:match "%.d%.ts$" then return false end -- 忽略 d.ts
-            if file_path:match ".+/src/.+%.ts$" then return true end
+            if file_path:match ".+/src/.+%.tsx?$" and contains_vitest_import(file_path) then return true end
 
             return false
           end,
