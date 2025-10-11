@@ -81,8 +81,9 @@ return {
     -- mappings to be set up on attaching of a language server
     mappings = {
       n = {
-        ["gd"] = false, -- 禁用默认的 gd 绑定
-        ["gD"] = false, -- 禁用默认的 gd 绑定
+        -- 禁用默认的 gd 绑定，因为弹出 quickfix list 不好用，禁用后 gd 将使用 snacks picker
+        ["gd"] = false,
+        ["gD"] = false,
         -- a `cond` key can provided as the string of a server capability to be required to attach, or a function with `client` and `bufnr` parameters from the `on_attach` that returns a boolean
         -- gD = {
         --   function() vim.lsp.buf.declaration() end,
