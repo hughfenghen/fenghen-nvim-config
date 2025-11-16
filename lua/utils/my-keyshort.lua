@@ -9,6 +9,9 @@ vim.keymap.set("i", "<C-A>", "<C-o>^", { desc = "移动到行首" })
 vim.keymap.set("i", "<C-E>", "<End>", { desc = "移动到行尾" })
 vim.keymap.set("i", "<C-B>", "<C-o>b", { desc = "向后移动一个单词" })
 vim.keymap.set("i", "<C-F>", "<C-o>w", { desc = "向前移动一个单词" })
+vim.keymap.set("i", "<C-S>", function()
+  if vim.bo.modifiable and not vim.bo.readonly then vim.cmd "write" end
+end, { desc = "保存当前buffer" })
 
 -- 合并 buflines 跟 search 的效果
 vim.keymap.set("n", "/", function()
@@ -72,6 +75,8 @@ vim.keymap.set("n", "gf", function()
 
     if line_col then file = file .. ":" .. line_col end
   end
+  -- 移除开头的目录符号
+  file = file:gsub("^[%./]+", "")
   Snacks.picker.files {
     pattern = file,
     follow = true,

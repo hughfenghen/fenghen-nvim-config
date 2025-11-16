@@ -10,16 +10,6 @@ return {
   "AstroNvim/astrocore",
   ---@type AstroCoreOpts
   opts = {
-    autocmds = {
-      -- 因为 注释行、长字符串行 自动 signature_help 经常弹出错误
-      disable_ts_signature_help = {
-        {
-          event = "FileType",
-          pattern = { "typescript", "typescriptreact" },
-          callback = function(args) vim.b[args.buf].signature_help = false end,
-        },
-      },
-    },
     -- Configure core features of AstroNvim
     features = {
       large_buf = { size = 1024 * 256, lines = 10000 }, -- set global limits for large files for disabling features like treesitter
