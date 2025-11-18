@@ -49,7 +49,8 @@ return {
         explorer = {
           layout = {
             layout = {
-              position = "right", -- <-- 把 "left" 改成 "bottom" / "right" 以改变开的位置
+              position = "float",
+              -- position = "right", -- <-- 把 "left" 改成 "bottom" / "right" 以改变开的位置
             },
           },
           auto_close = true,
