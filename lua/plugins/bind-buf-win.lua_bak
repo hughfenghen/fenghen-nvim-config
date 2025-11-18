@@ -1,3 +1,4 @@
+return {}
 -- 文件: lua/plugins/bufwin_bind.lua
 local M = {
   buf_to_win = {}, -- bufnr -> winid
