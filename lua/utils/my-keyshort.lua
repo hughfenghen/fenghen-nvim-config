@@ -108,7 +108,8 @@ vim.keymap.set("n", "<Tab>", function()
       ret[#ret + 1] = { string.format("%-4s", tostring(item.buf)), "WarningMsg" }
 
       local path = Snacks.picker.util.path(item) or item.file
-      path = Snacks.picker.util.truncpath(path, picker.opts.formatters.file.truncate or 40, { cwd = picker:cwd() })
+      path =
+        Snacks.picker.util.truncpath(path, tonumber(picker.opts.formatters.file.truncate) or 40, { cwd = picker:cwd() })
       local name, cat = path, "file"
       if item.buf and vim.api.nvim_buf_is_loaded(item.buf) then
         name = vim.bo[item.buf].filetype
