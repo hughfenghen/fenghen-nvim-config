@@ -24,7 +24,7 @@ return {
   opts = {
     bigfile = { enabled = true },
     dashboard = { enabled = true },
-    explorer = { enabled = false },
+    explorer = { enabled = true },
     indent = { enabled = true },
     input = { enabled = true },
     notifier = {
@@ -43,6 +43,16 @@ return {
           keys = {
             ["<c-a>"] = false, -- 禁用输入窗口中的 Ctrl+A
           },
+        },
+      },
+      sources = {
+        explorer = {
+          layout = {
+            layout = {
+              position = "right", -- <-- 把 "left" 改成 "bottom" / "right" 以改变开的位置
+            },
+          },
+          auto_close = true,
         },
       },
     },
