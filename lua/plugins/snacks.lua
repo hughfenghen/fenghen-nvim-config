@@ -1,21 +1,6 @@
 ---@module 'snacks.meta.types'
 -- luacheck: globals vim
 
-local filetypes = {
-  { text = "typescript" },
-  { text = "markdown" },
-  { text = "typescriptreact" },
-  { text = "css" },
-  { text = "html" },
-  { text = "javascript" },
-  { text = "javascriptreact" },
-  { text = "lua" },
-  -- { text = "go" },
-  -- { text = "python" },
-  -- { text = "rust" },
-  -- { text = "zig" },
-}
-
 return {
   "folke/snacks.nvim",
   priority = 1000,
@@ -177,42 +162,27 @@ return {
     { "gr", function() Snacks.picker.lsp_references() end, nowait = true, desc = "References" },
     { "gI", function() Snacks.picker.lsp_implementations() end, desc = "Goto Implementation" },
     { "gy", function() Snacks.picker.lsp_type_definitions() end, desc = "Goto T[y]pe Definition" },
+    -- 显示所有符号类型
     {
       "<leader>ss",
-      function()
-        Snacks.picker.lsp_symbols {
-          filter = { [vim.bo.filetype] = true }, -- 显示所有符号类型
-        }
-      end,
+      function() Snacks.picker.lsp_symbols { filter = { [vim.bo.filetype] = true } } end,
       desc = "LSP Symbols",
     },
+    -- 显示所有符号类型
     {
       "<leader>sS",
-      function()
-        Snacks.picker.lsp_workspace_symbols {
-          filter = { [vim.bo.filetype] = true }, -- 显示所有符号类型
-        }
-      end,
+      function() Snacks.picker.lsp_workspace_symbols { filter = { [vim.bo.filetype] = true } } end,
       desc = "LSP Workspace Symbols",
     },
     -- Other
     { "<leader>z", function() Snacks.zen() end, desc = "Toggle Zen Mode" },
     { "<leader>Z", function() Snacks.zen.zoom() end, desc = "Toggle Zoom" },
-    -- { "<leader>.", function() Snacks.scratch() end, desc = "Toggle Scratch Buffer" },
-    {
-      "_",
-      function() require("utils.my-scratch").new_scratch(filetypes) end,
-      desc = "Toggle Scratch Buffer",
-    },
-    {
-      "-",
-      function() require("utils.my-scratch").select_scratch() end,
-      desc = "Select Scratch Buffer",
-    },
+    { "<leader>-", function() Snacks.scratch { ft = "markdown" } end, desc = "Toggle Scratch Buffer" },
+    { "<leader>_", function() Snacks.scratch.select() end, desc = "Select Scratch Buffer" },
     -- { "<leader>S", function() Snacks.scratch.select() end, desc = "Select Scratch Buffer" },
     { "<leader>n", function() Snacks.notifier.show_history() end, desc = "Notification History" },
     { "<leader>bd", function() Snacks.bufdelete() end, desc = "Delete Buffer" },
-    { "<leader>cR", function() Snacks.rename.rename_file() end, desc = "Rename File" },
+    -- { "<leader>cR", function() Snacks.rename.rename_file() end, desc = "Rename File" },
     { "<leader>gB", function() Snacks.gitbrowse() end, desc = "Git Browse", mode = { "n", "v" } },
     { "<leader>gg", function() Snacks.lazygit() end, desc = "Lazygit" },
     { "<leader>un", function() Snacks.notifier.hide() end, desc = "Dismiss All Notifications" },
@@ -220,24 +190,6 @@ return {
     -- { "<c-_>", function() Snacks.terminal() end, desc = "which_key_ignore" },
     { "]]", function() Snacks.words.jump(vim.v.count1) end, desc = "Next Reference", mode = { "n", "t" } },
     { "[[", function() Snacks.words.jump(-vim.v.count1) end, desc = "Prev Reference", mode = { "n", "t" } },
-    {
-      "<leader>N",
-      desc = "Neovim News",
-      function()
-        Snacks.win {
-          file = vim.api.nvim_get_runtime_file("doc/news.txt", false)[1],
-          width = 0.6,
-          height = 0.6,
-          wo = {
-            spell = false,
-            wrap = false,
-            signcolumn = "yes",
-            statuscolumn = " ",
-            -- conceallevel = 3,
-          },
-        }
-      end,
-    },
   },
   init = function()
     vim.api.nvim_create_autocmd("User", {
