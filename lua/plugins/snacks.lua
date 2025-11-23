@@ -39,6 +39,13 @@ return {
             },
           },
           auto_close = true,
+          win = {
+            list = {
+              keys = {
+                ["<c-c>"] = "close", -- 将 <c-c> 改为关闭窗口
+              },
+            },
+          },
         },
       },
     },
