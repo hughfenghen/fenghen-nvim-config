@@ -19,8 +19,9 @@ return {
     picker = {
       enabled = true,
       previewers = {
-        git = {
-          native = true,
+        diff = {
+          builtin = false,
+          style = "terminal",
         },
       },
       win = {
