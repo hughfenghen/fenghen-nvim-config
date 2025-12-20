@@ -15,7 +15,7 @@ return {
     set({ "n", "x" }, "<leader><down>", function() mc.lineSkipCursor(1) end, { desc = "跳过下方添加光标" })
 
     -- Add or skip adding a new cursor by matching word/selection
-    set({ "n", "x" }, "<C-n>", function() mc.matchAddCursor(1) end, { desc = "在下一个匹配处添加光标" })
+    set({ "x" }, "<C-n>", function() mc.matchAddCursor(1) end, { desc = "在下一个匹配处添加光标" })
     set({ "n", "x" }, "<C-s>", function() mc.matchSkipCursor(1) end, { desc = "跳过下一个匹配" })
     set({ "n", "x" }, "<C-m>", function() mc.matchSkipCursor(-1) end, { desc = "跳过上一个匹配" })
     -- set({ "n", "x" }, "<leader>S", function() mc.matchSkipCursor(-1) end, { desc = "跳过上一个匹配" })

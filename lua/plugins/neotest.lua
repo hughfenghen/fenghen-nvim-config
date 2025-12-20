@@ -24,8 +24,7 @@ return {
     require("neotest").setup {
       adapters = {
         require "neotest-vitest" {
-          command = "vitest",
-          -- command = function() return { "pnpm", "vitest" } end,
+          vitestCommand = "npx vitest --hideSkippedTests",
           cwd = function(testFilePath) return vim.fs.root(testFilePath, "node_modules") end,
 
           filter_dir = function(name) return name ~= "node_modules" end,
