@@ -2,7 +2,7 @@
 return {
   "brglng/vim-im-select",
   event = "InsertEnter",
-  enabled = false,
+  -- enabled = false,
   config = function()
     -- macOS 配置
     if vim.fn.has "mac" == 1 then

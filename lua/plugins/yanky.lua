@@ -1,7 +1,7 @@
 return {
   "gbprod/yanky.nvim",
   opts = {},
-  event = "VeryLazy",
+  event = "TextYankPost",
   config = function()
     require("yanky").setup()
     -- 设置粘贴时的高亮颜色

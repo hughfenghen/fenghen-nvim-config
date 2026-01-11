@@ -5,6 +5,8 @@ return {
   -- use mason-tool-installer for automatically installing Mason packages
   {
     "WhoIsSethDaniel/mason-tool-installer.nvim",
+    lazy = true,
+    event = "User AstroFile",
     -- overrides `require("mason-tool-installer").setup(...)`
     opts = {
       -- Make sure to use the names found in `:Mason`
