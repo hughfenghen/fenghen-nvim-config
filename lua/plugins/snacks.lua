@@ -1,6 +1,34 @@
 ---@module 'snacks.meta.types'
 -- luacheck: globals vim
 
+local filePickerTransform = {
+  format = "file", -- 使用默认的 file formatter
+  transform = function(item)
+    item.line = nil -- 移除代码行
+    return item
+  end,
+}
+
+local function file_no_code(item, picker)
+  local ret = {}
+
+  if item.label then
+    ret[#ret + 1] = { item.label, "SnacksPickerLabel" }
+    ret[#ret + 1] = { " ", virtual = true }
+  end
+
+  if item.parent then vim.list_extend(ret, Snacks.picker.format.tree(item, picker)) end
+
+  if item.status then vim.list_extend(ret, Snacks.picker.format.file_git_status(item, picker)) end
+
+  if item.severity then vim.list_extend(ret, Snacks.picker.format.severity(item, picker)) end
+
+  -- 只显示文件名/路径，不显示代码
+  vim.list_extend(ret, Snacks.picker.format.filename(item, picker))
+
+  return ret
+end
+
 return {
   "folke/snacks.nvim",
   priority = 1000,
@@ -32,6 +60,11 @@ return {
         },
       },
       sources = {
+        -- 列表中移除代码，避免干扰
+        lsp_definitions = filePickerTransform,
+        lsp_references = filePickerTransform,
+        lsp_implementations = filePickerTransform,
+        grep = { format = file_no_code },
         explorer = {
           layout = {
             layout = {
@@ -192,7 +225,7 @@ return {
     { "<leader>bd", function() Snacks.bufdelete() end, desc = "Delete Buffer" },
     -- { "<leader>cR", function() Snacks.rename.rename_file() end, desc = "Rename File" },
     { "<leader>gB", function() Snacks.gitbrowse() end, desc = "Git Browse", mode = { "n", "v" } },
-    { "<leader>gg", function() Snacks.lazygit() end, desc = "Lazygit" },
+    -- { "<leader>gg", function() Snacks.lazygit() end, desc = "Lazygit" },
     { "<leader>un", function() Snacks.notifier.hide() end, desc = "Dismiss All Notifications" },
     -- { "<c-/>", function() Snacks.terminal() end, desc = "Toggle Terminal" },
     -- { "<c-_>", function() Snacks.terminal() end, desc = "which_key_ignore" },

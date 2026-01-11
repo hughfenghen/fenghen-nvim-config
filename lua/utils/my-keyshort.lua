@@ -13,6 +13,13 @@ vim.keymap.set("i", "<C-S>", function()
   if vim.bo.modifiable and not vim.bo.readonly then vim.cmd "write" end
 end, { desc = "保存当前buffer" })
 
+vim.keymap.set("n", "<leader>gg", "<cmd>Neogit<cr>", { desc = "Show Neogit UI" })
+
+vim.keymap.set("n", "<leader>rp", function()
+  require("plenary.reload").reload_module "im_select"
+  require("fenghen_im_select").setup { default_native_im = "com.tencent.inputmethod.wetype.pinyin" }
+end, { desc = "reload im-select" })
+
 -- 合并 buflines 跟 search 的效果
 vim.keymap.set("n", "/", function()
   Snacks.picker.lines {

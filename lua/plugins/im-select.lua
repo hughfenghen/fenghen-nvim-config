@@ -2,10 +2,9 @@
 return {
   "brglng/vim-im-select",
   event = "InsertEnter",
-  -- enabled = false,
+  enabled = false,
   config = function()
     -- macOS 配置
-    -- o带带
     if vim.fn.has "mac" == 1 then
       vim.g.im_select_get_im_cmd = { "macism" }
       vim.g.ImSelectSetImCmd = function(key)
