@@ -1,7 +1,7 @@
 -- if true then return {} end -- WARN: REMOVE THIS LINE TO ACTIVATE THIS FILE
 return {
   "brglng/vim-im-select",
-  event = "InsertEnter",
+  event = "VeryLazy",
   -- enabled = false,
   config = function()
     -- macOS 配置

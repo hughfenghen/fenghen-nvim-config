@@ -8,6 +8,7 @@
 ---@type LazySpec
 return {
   "AstroNvim/astrolsp",
+  event = "VeryLazy",
   ---@type AstroLSPOpts
   opts = {
     -- Configuration table of features provided by AstroLSP
