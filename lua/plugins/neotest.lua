@@ -1,6 +1,6 @@
 return {
   "nvim-neotest/neotest",
-  lazy = true,
+  event = "VeryLazy",
   dependencies = {
     "marilari88/neotest-vitest",
     "nvim-lua/plenary.nvim",

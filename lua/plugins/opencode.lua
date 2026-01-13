@@ -50,6 +50,12 @@ return {
       function() return require("opencode").operator "@this " .. "_" end,
       { expr = true, desc = "Add line to opencode" }
     )
+    vim.keymap.set(
+      "n",
+      "gob",
+      function() return require("opencode").operator "@buffer " .. "_" end,
+      { expr = true, desc = "Add buffer to opencode" }
+    )
 
     vim.keymap.set(
       "n",
