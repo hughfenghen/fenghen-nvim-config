@@ -14,7 +14,8 @@ return {
         enabled = "snacks",
         snacks = {
           win = {
-            position = "left", -- 改为左侧
+            position = "float",
+            enter = true,
           },
         },
       },
@@ -22,6 +23,14 @@ return {
 
     -- Required for `opts.events.reload`.
     vim.o.autoread = true
+    vim.api.nvim_create_autocmd("User", {
+      pattern = "OpencodeEvent:*", -- Optionally filter event types
+      callback = function(args)
+        ---@type opencode.cli.client.Event
+        local event = args.data.event
+        if event.type == "session.idle" then vim.notify "`Opencode` finished responding" end
+      end,
+    })
 
     -- Recommended/example keymaps.
     vim.keymap.set(
