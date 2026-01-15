@@ -33,6 +33,11 @@ return {
     keymaps = {
       show_help = "<f1>",
     },
+    hooks = {
+      yazi_opened = function()
+        vim.defer_fn(function() vim.fn.system "macism com.apple.keylayout.ABC" end, 100)
+      end,
+    },
   },
   -- 👇 if you use `open_for_directories=true`, this is recommended
   init = function()
@@ -40,5 +45,14 @@ return {
     --
     -- More details: https://github.com/mikavilpas/yazi.nvim/issues/802
     vim.g.loaded_netrwPlugin = 1
+    --     -- 自动切换到英文输入法
+    -- vim.api.nvim_create_autocmd("WinEnter", {
+    --   pattern = "*",
+    --   callback = function()
+    --     if vim.bo.filetype == "yazi" then
+    --       vim.fn.system "macism com.apple.keylayout.ABC"
+    --     end
+    --   end,
+    -- })
   end,
 }
