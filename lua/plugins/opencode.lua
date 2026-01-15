@@ -16,6 +16,9 @@ return {
           win = {
             position = "float",
             enter = true,
+            on_win = function()
+              vim.defer_fn(function() vim.fn.system "macism com.tencent.inputmethod.wetype.pinyin" end, 100)
+            end,
           },
         },
       },
