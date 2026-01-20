@@ -35,10 +35,10 @@ return {
             if vim.fn.isdirectory(file_path) == 1 then return false end
 
             -- 默认逻辑: 只认 .test. / .spec.
-            if file_path:match "%.test%.tsx?$" or file_path:match "%.spec%.tsx?$" then return true end
+            if file_path:match "%.test%.[tj]sx?$" or file_path:match "%.spec%.[tj]sx?$" then return true end
             -- 扩展: 允许普通源码文件也包含测试
-            if file_path:match "%.d%.ts$" then return false end -- 忽略 d.ts
-            if file_path:match ".+/src/.+%.tsx?$" and contains_vitest_import(file_path) then return true end
+            if file_path:match "%.d%.[tj]s$" then return false end -- 忽略 d.ts
+            if file_path:match ".+/src/.+%.[tj]sx?$" and contains_vitest_import(file_path) then return true end
 
             return false
           end,

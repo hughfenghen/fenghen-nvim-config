@@ -1,7 +1,7 @@
 return {
   -- name = "fenghen-im-select",
-  dir = "/Users/fenghen/my-space/fenghen-im-select.nvim", -- 本地路径
-  -- "hughfenghen/fenghen-im-select.nvim",
+  -- dir = "/Users/fenghen/my-space/fenghen-im-select.nvim", -- 本地路径
+  "hughfenghen/fenghen-im-select.nvim",
   -- enabled = false,
   config = function()
     -- macOS 配置
