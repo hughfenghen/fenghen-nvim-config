@@ -14,6 +14,7 @@ vim.keymap.set("i", "<C-S>", function()
 end, { desc = "保存当前buffer" })
 
 vim.keymap.set("n", "<leader>gg", "<cmd>Neogit<cr>", { desc = "Show Neogit UI" })
+vim.keymap.set("n", "<leader>tc", "<cmd>tabclose<cr>", { desc = "tabclose" })
 
 vim.keymap.set("n", "<leader>rp", function()
   require("plenary.reload").reload_module "im_select"
