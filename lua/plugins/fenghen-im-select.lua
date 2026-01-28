@@ -42,17 +42,38 @@ return {
       end,
       -- 如果光标前是英文字母，切换英文输入法
       function(ctx)
-        local nr = ctx.charcode_before or ctx.charcode_after or 0
-        if nr >= 0x41 and nr <= 0x5A or nr >= 0x61 and nr <= 0x7A then return im_select_default end
+        local ch = ctx.char_before or ctx.char_after or ""
+        if ch:match "[a-zA-Z]" then return im_select_default end
+      end,
+      -- 如果源代码（tsx，jsx，lua，html，css），注释行切换中文，否则切换英文
+      function(ctx)
+        local valid_types = {
+          typescript = true,
+          typescriptreact = true,
+          javascript = true,
+          javascriptreact = true,
+          lua = true,
+          html = true,
+          css = true,
+          python = true,
+        }
+        local is_match = valid_types[ctx.filetype]
+        if is_match then
+          if ctx.is_inside_comment then
+            return im_select_native_im
+          else
+            return im_select_default
+          end
+        end
       end,
 
       -- 如果光标前是空格，切换到上次使用的输入法
-      function(ctx)
-        local nr = ctx.charcode_before or 0
-        if nr == 0x0020 or nr == 0x3000 then return im_select.get_prev_im() end
-      end,
+      -- function(ctx)
+      --   local nr = ctx.charcode_before or 0
+      --   if nr == 0x0020 or nr == 0x3000 then return im_select.get_prev_im() end
+      -- end,
 
-      -- Markdown 兜底切换至中文
+      -- Markdown 默认切换至中文
       function(ctx)
         if ctx.filetype == "markdown" then return im_select_native_im end
       end,

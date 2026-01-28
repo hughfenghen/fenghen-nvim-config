@@ -18,7 +18,7 @@
   "codecompanion.nvim": { "branch": "main", "commit": "0e65709acd6efd840d438060f7001d0374af6ab1" },
   "conform.nvim": { "branch": "master", "commit": "8314f4c9e205e7f30b62147069729f9a1227d8bf" },
   "diffview.nvim": { "branch": "main", "commit": "4516612fe98ff56ae0415a259ff6361a89419b0a" },
-  "fenghen-im-select.nvim": { "branch": "main", "commit": "c21d7d96206aad330a29a54d228e2e47379cc8d3" },
+  "fenghen-im-select.nvim": { "branch": "main", "commit": "2028a778af6b61c6dd51e2a028485073e06c9632" },
   "flash.nvim": { "branch": "main", "commit": "fcea7ff883235d9024dc41e638f164a450c14ca2" },
   "friendly-snippets": { "branch": "main", "commit": "572f5660cf05f8cd8834e096d7b4c921ba18e175" },
   "gitsigns.nvim": { "branch": "main", "commit": "7010000889bfb6c26065e0b0f7f1e6aa9163edd9" },

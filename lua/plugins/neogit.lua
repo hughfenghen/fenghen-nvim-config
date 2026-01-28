@@ -12,7 +12,7 @@ return {
     { "<leader>gg", "<cmd>Neogit<cr>", desc = "Show Neogit UI" },
   },
   config = function()
-    require("neogit").setup {}
+    require("neogit").setup { fetch_after_checkout = true }
 
     local actions = require "diffview.actions"
     require("diffview").setup {
