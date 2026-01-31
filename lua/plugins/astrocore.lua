@@ -63,7 +63,8 @@ return {
         -- navigate buffer tabs
         ["]b"] = { function() require("astrocore.buffer").nav(vim.v.count1) end, desc = "Next buffer" },
         ["[b"] = { function() require("astrocore.buffer").nav(-vim.v.count1) end, desc = "Previous buffer" },
-        -- 忽略内置的 ToggleTerm 相关快捷键
+        -- 忽略内置的快捷键
+        ["<Leader>c"] = false,
         ["<Leader>th"] = false,
         ["<Leader>tl"] = false,
         ["<Leader>tv"] = false,

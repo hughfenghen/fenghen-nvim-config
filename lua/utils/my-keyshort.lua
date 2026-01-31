@@ -181,4 +181,26 @@ vim.keymap.set("n", "<Tab>", function()
   }
 end, { desc = "Switch buffers" })
 
+-- 复制文件路径
+vim.keymap.set("n", "<leader>cc", function()
+  local text = string.format("@%s L%d", vim.fn.expand "%:.", vim.fn.line ".")
+  vim.fn.setreg("+", text)
+end, { desc = "Copy file path" })
+vim.keymap.set("v", "<leader>cc", function()
+  local start_pos = vim.fn.getpos "v"
+  local end_pos = vim.fn.getpos "."
+  local start_line = start_pos[2]
+  local end_line = end_pos[2]
+
+  -- 交换位置以确保 start 在 end 之前
+  if start_line > end_line or (start_line == end_line) then
+    start_line, end_line = end_line, start_line
+  end
+
+  local text = string.format("@%s L%d-L%d", vim.fn.expand "%:.", start_line, end_line)
+  vim.fn.setreg("+", text)
+  -- 退出 visual 模式
+  vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Esc>", true, false, true), "n", false)
+end, { desc = "Copy file path" })
+
 return {}
