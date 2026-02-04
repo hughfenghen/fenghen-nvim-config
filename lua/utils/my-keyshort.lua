@@ -183,6 +183,10 @@ end, { desc = "Switch buffers" })
 
 -- 复制文件路径
 vim.keymap.set("n", "<leader>cc", function()
+  local text = string.format("@%s", vim.fn.expand "%:.")
+  vim.fn.setreg("+", text)
+end, { desc = "Copy file path" })
+vim.keymap.set("n", "<leader>cl", function()
   local text = string.format("@%s L%d", vim.fn.expand "%:.", vim.fn.line ".")
   vim.fn.setreg("+", text)
 end, { desc = "Copy file path" })
