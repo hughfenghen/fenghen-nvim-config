@@ -77,5 +77,5 @@
   "vim-im-select": { "branch": "master", "commit": "fea18dab8bf9b153a0d7e1058d68a5d48ad6a0be" },
   "which-key.nvim": { "branch": "main", "commit": "fcbf4eea17cb299c02557d576f0d568878e354a4" },
   "yanky.nvim": { "branch": "main", "commit": "04fc42b94305d94948c9c197f679336668af3292" },
-  "yazi.nvim": { "branch": "main", "commit": "ba8aa934dcb932efb5c9b3f869470baaedaad068" }
+  "yazi.nvim": { "branch": "main", "commit": "1874d812de12881d1da8c19c8ce2f94f36d00a6b" }
 }

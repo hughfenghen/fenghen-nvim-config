@@ -17,6 +17,7 @@ return {
     {
       -- Open in the current working directory
       "_",
+      mode = { "n", "v" },
       "<cmd>Yazi cwd<cr>",
       desc = "Open the file manager in nvim's working directory",
     },
@@ -42,17 +43,7 @@ return {
   -- 👇 if you use `open_for_directories=true`, this is recommended
   init = function()
     -- mark netrw as loaded so it's not loaded at all.
-    --
     -- More details: https://github.com/mikavilpas/yazi.nvim/issues/802
     vim.g.loaded_netrwPlugin = 1
-    --     -- 自动切换到英文输入法
-    -- vim.api.nvim_create_autocmd("WinEnter", {
-    --   pattern = "*",
-    --   callback = function()
-    --     if vim.bo.filetype == "yazi" then
-    --       vim.fn.system "macism com.apple.keylayout.ABC"
-    --     end
-    --   end,
-    -- })
   end,
 }
