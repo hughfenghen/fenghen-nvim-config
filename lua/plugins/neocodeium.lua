@@ -12,7 +12,7 @@ return {
   keys = {
     -- 接受整个建议
     {
-      "<A-.>",
+      "<A-e>",
       function() require("neocodeium").accept() end,
       mode = "i",
       desc = "Accept suggestion",

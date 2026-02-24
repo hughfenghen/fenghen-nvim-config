@@ -67,12 +67,6 @@ return {
         end
       end,
 
-      -- 如果光标前是空格，切换到上次使用的输入法
-      -- function(ctx)
-      --   local nr = ctx.charcode_before or 0
-      --   if nr == 0x0020 or nr == 0x3000 then return im_select.get_prev_im() end
-      -- end,
-
       -- Markdown 默认切换至中文
       function(ctx)
         if ctx.filetype == "markdown" then return im_select_native_im end

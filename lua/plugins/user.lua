@@ -26,13 +26,13 @@ return {
   -- You can disable default plugins as follows:
   { "max397574/better-escape.nvim", enabled = false },
   { "nvim-neo-tree/neo-tree.nvim", enabled = false },
-  { "rebelot/heirline.nvim", enabled = false },
   {
     "windwp/nvim-autopairs",
-    config = function(plugin, opts)
-      require "astronvim.plugins.configs.nvim-autopairs"(plugin, opts) -- include the default astronvim config that calls the setup call
+    config = function()
       -- add more custom autopairs configuration such as custom rules
       local npairs = require "nvim-autopairs"
+      npairs.setup {}
+
       local Rule = require "nvim-autopairs.rule"
       local cond = require "nvim-autopairs.conds"
       npairs.add_rules(
