@@ -28,27 +28,20 @@ return {
     end
 
     -- 文件路径组件
-    local function filename_with_path()
-      local filename = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(0), ":.")
-      if filename == "" then return "[No Name]" end
-
-      -- 如果路径太长，缩短显示
-      local max_length = math.floor(vim.o.columns * 0.25)
-      if #filename > max_length then filename = vim.fn.pathshorten(filename, 3) end
-
-      if vim.bo.modified then filename = filename .. " *" end
-      return filename
-    end
+    -- local function filename_with_path()
+    --   local filename = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(0), ":.")
+    --   if filename == "" then return "[No Name]" end
+    --
+    --   -- 如果路径太长，缩短显示
+    --   local max_length = math.floor(vim.o.columns * 0.25)
+    --   if #filename > max_length then filename = vim.fn.pathshorten(filename, 3) end
+    --
+    --   if vim.bo.modified then filename = filename .. " *" end
+    --   return filename
+    -- end
 
     -- 时钟组件
     local function clock() return os.date "🕑%H:%M" end
-
-    -- 修复滚动后高亮状态消失，导致不显示匹配数量
-    -- vim.api.nvim_create_autocmd("WinScrolled", {
-    --   callback = function()
-    --     if vim.fn.getreg "/" ~= "" and vim.v.hlsearch == 0 then vim.opt.hlsearch = true end
-    --   end,
-    -- })
 
     local function search_cnt()
       if vim.v.hlsearch == 0 then return "" end
@@ -77,13 +70,13 @@ return {
         lualine_b = { "branch", "diff", "diagnostics" },
         lualine_c = {
           "%=",
-          {
-            filename_with_path,
-            color = function()
-              local utils = require "lualine.utils.utils"
-              return { fg = utils.extract_highlight_colors("Directory", "fg") }
-            end,
-          },
+          -- {
+          --   filename_with_path,
+          --   color = function()
+          --     local utils = require "lualine.utils.utils"
+          --     return { fg = utils.extract_highlight_colors("Directory", "fg") }
+          --   end,
+          -- },
           { search_cnt, type = "lua_expr" },
         },
         lualine_x = {
@@ -100,7 +93,7 @@ return {
           },
           {
             clock,
-            color = { fg = "white" },
+            color = { fg = "gray" },
           },
         },
         lualine_z = {},
