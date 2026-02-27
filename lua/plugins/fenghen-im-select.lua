@@ -75,7 +75,7 @@ return {
       function() return im_select_default end,
     }
 
-    opts.im_select_switch_timeout = 100
+    opts.im_select_switch_timeout = 50
     opts.im_select_enable_focus_events = 1
     opts.im_select_enable_cmd_line = 1
 

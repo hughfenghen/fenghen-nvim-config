@@ -38,8 +38,16 @@ return {
       local cond = require "nvim-autopairs.conds"
       npairs.add_rules(
         {
+          Rule("“", "”"):use_multibyte(),
+          Rule("‘", "’"):use_multibyte(),
+          -- 以下规则光标位置错误
+          -- Rule("【", "】"):use_multibyte():use_key "【",
+          -- Rule("（", "）"):use_multibyte():use_key "（",
+          -- Rule("「", "」"):use_multibyte():use_key "「",
+          -- Rule("《", "》"):use_multibyte():use_key "《",
+
           Rule("$", "$", { "tex", "latex" })
-            -- don't add a pair if the next character is %
+            -- don't add a pair if the next character is % “”
             :with_pair(cond.not_after_regex "%%")
             -- don't add a pair if  the previous character is xxx
             :with_pair(
