@@ -112,8 +112,6 @@ vim.keymap.set("n", "<Tab>", function()
     },
     format = function(item, picker)
       local ret = {}
-      -- Column 1: Buffer ID (Orange)
-      ret[#ret + 1] = { string.format("%-4s", tostring(item.buf)), "WarningMsg" }
 
       local path = Snacks.picker.util.path(item) or item.file
       path =
@@ -172,7 +170,7 @@ vim.keymap.set("n", "<Tab>", function()
 
       -- 设置文件名的固定宽度
       if display_path ~= "" then
-        ret[#ret + 1] = { "    ", "None" } -- Separator
+        ret[#ret + 1] = { "  ", "None" } -- Separator
         ret[#ret + 1] = { display_path, "SnacksPickerComment" }
       end
 
