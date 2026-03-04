@@ -153,7 +153,40 @@ return {
     {
       "<leader><space>",
       function()
+        local frecency = require("snacks.picker.core.frecency").new()
         Snacks.picker.smart {
+          matcher = {
+            frecency = false,
+            cwd_bonus = false,
+            sort_empty = true,
+          },
+          sort = function(a, b)
+            local a_score = a.score or 0
+            local b_score = b.score or 0
+            if a_score ~= b_score then return a_score > b_score end
+
+            local function get_lastused(item)
+              if item.info and item.info.lastused then return item.info.lastused end
+              return 0
+            end
+
+            local function get_hotness(item)
+              if item.frecency == nil then
+                item.frecency = frecency:get(item)
+              end
+              return item.frecency
+            end
+
+            local a_time = get_lastused(a)
+            local b_time = get_lastused(b)
+            if a_time ~= b_time then return a_time > b_time end
+
+            local a_hot = get_hotness(a)
+            local b_hot = get_hotness(b)
+            if a_hot ~= b_hot then return a_hot > b_hot end
+
+            return (a.idx or 0) < (b.idx or 0)
+          end,
           win = {
             input = {
               keys = {
