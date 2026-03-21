@@ -1,7 +1,7 @@
 return {
-  -- name = "fenghen-im-select",
-  -- dir = "/Users/fenghen/my-space/fenghen-im-select.nvim", -- 本地路径
-  "hughfenghen/fenghen-im-select.nvim",
+  name = "fenghen-im-select",
+  dir = "/Users/fenghen/my-space/fenghen-im-select.nvim", -- 本地路径
+  -- "hughfenghen/fenghen-im-select.nvim",
   -- enabled = false,
   config = function()
     local im_select = require "im_select.init"
@@ -14,9 +14,9 @@ return {
 
     -- macOS 配置
     if vim.fn.has "mac" == 1 then
-      opts.im_select_get_im_cmd = { "macism" }
+      opts.im_select_get_im_cmd = { "/Users/fenghen/my-space/macism/macism" }
       opts.ImSelectSetImCmd = function(key)
-        local cmd = { "macism", key }
+        local cmd = { "/Users/fenghen/my-space/macism/macism", key }
         return cmd
       end
 

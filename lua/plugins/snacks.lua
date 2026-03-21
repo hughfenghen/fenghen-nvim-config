@@ -171,9 +171,7 @@ return {
             end
 
             local function get_hotness(item)
-              if item.frecency == nil then
-                item.frecency = frecency:get(item)
-              end
+              if item.frecency == nil then item.frecency = frecency:get(item) end
               return item.frecency
             end
 

@@ -4,6 +4,10 @@
 vim.keymap.set("n", "<C-I>", "<C-I>", { desc = "Jump forward in jumplist" })
 vim.keymap.set("n", "<C-O>", "<C-O>", { desc = "Jump backward in jumplist" })
 
+-- 避免 p 污染寄存器
+vim.keymap.set("x", "p", '"_dP', { noremap = true })
+vim.keymap.set("x", "P", '"_dp', { noremap = true })
+
 -- 插入模式 与命令行模式保持一致 在行内快速移动光标
 vim.keymap.set("i", "<C-A>", "<C-o>^", { desc = "移动到行首" })
 vim.keymap.set("i", "<C-E>", "<End>", { desc = "移动到行尾" })
