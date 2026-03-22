@@ -10,6 +10,18 @@ return {
   keys = {
     -- { "<leader>gn", "<cmd>Neogit<cr>", desc = "Show Neogit UI" },
     { "<leader>gg", "<cmd>Neogit<cr>", desc = "Show Neogit UI" },
+    {
+      "<leader>gd",
+      function()
+        local file = vim.fn.expand "%"
+        if file ~= "" then
+          vim.cmd("DiffviewOpen -- " .. file)
+        else
+          print "not found file"
+        end
+      end,
+      desc = "diff this file",
+    },
   },
   config = function()
     require("neogit").setup { fetch_after_checkout = true }
