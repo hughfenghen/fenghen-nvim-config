@@ -11,24 +11,14 @@
 ---@type LazySpec
 return {
   -- == Examples of Adding Plugins ==
-  "andweeb/presence.nvim",
-  {
-    "ray-x/lsp_signature.nvim",
-    enabled = false,
-    event = "BufRead",
-    config = function()
-      require("lsp_signature").setup {
-        debug = false, -- 禁用调试日志
-        verbose = false, -- 禁用详细输出
-      }
-    end,
-  },
+  { "ray-x/lsp_signature.nvim", enabled = false, event = "BufRead" },
   -- You can disable default plugins as follows:
   { "max397574/better-escape.nvim", enabled = false },
   { "nvim-neo-tree/neo-tree.nvim", enabled = false },
   { "rebelot/heirline.nvim", enabled = false },
   {
     "windwp/nvim-autopairs",
+    event = "InsertEnter",
     config = function()
       -- add more custom autopairs configuration such as custom rules
       local npairs = require "nvim-autopairs"

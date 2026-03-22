@@ -1,5 +1,6 @@
 return {
   "nvim-lualine/lualine.nvim",
+  event = "VeryLazy",
   opts = function()
     -- NeoCodeium 状态组件
     local function neocodeium_status()
