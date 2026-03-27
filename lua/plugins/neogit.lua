@@ -12,5 +12,5 @@ return {
     -- { "<leader>gn", "<cmd>Neogit<cr>", desc = "Show Neogit UI" },
     { "<leader>gg", "<cmd>Neogit<cr>", desc = "Show Neogit UI" },
   },
-  config = function() require("neogit").setup { fetch_after_checkout = true } end,
+  -- config = function() require("neogit").setup { fetch_after_checkout = true } end,
 }

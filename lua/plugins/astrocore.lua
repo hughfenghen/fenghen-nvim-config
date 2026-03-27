@@ -70,6 +70,9 @@ return {
         ["<Leader>tv"] = false,
         ["<Leader>tp"] = false,
         ["<Leader>tn"] = false,
+        ["<Leader>gc"] = false,
+        ["<Leader>gC"] = false,
+        ["<Leader>h"] = false,
         -- 默认右侧打开
         ["<C-'>"] = { "<Cmd>ToggleTerm size=80 direction=vertical<CR>", desc = "Toggle terminal" },
 

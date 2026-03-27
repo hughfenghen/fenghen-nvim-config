@@ -32,7 +32,8 @@ end
 return {
   "folke/snacks.nvim",
   priority = 1000,
-  lazy = false,
+  -- lazy = true,
+  event = "VeryLazy",
   ---@type snacks.Config
   opts = {
     bigfile = { enabled = true },
@@ -56,6 +57,7 @@ return {
         input = {
           keys = {
             ["<c-a>"] = false, -- 禁用输入窗口中的 Ctrl+A
+            -- ["<c-c>"] = "close", -- 将 <c-c> 改为关闭窗口
           },
         },
       },
@@ -396,9 +398,6 @@ return {
         Snacks.toggle.inlay_hints():map "<leader>uh"
         Snacks.toggle.indent():map "<leader>ug"
         Snacks.toggle.dim():map "<leader>uD"
-
-        -- 删除快捷键，改快捷键指向 home screen，导致插件报错
-        vim.keymap.del("n", "<leader>h")
       end,
     })
   end,

@@ -5,7 +5,7 @@
 ---@type LazySpec
 return {
   "nvimtools/none-ls.nvim",
-  event = "VeryLazy",
+  event = "BufWritePre",
   opts = function(_, opts)
     -- opts variable is the default configuration table for the setup function call
     -- local null_ls = require "null-ls"

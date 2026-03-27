@@ -1,6 +1,6 @@
 return {
   "folke/flash.nvim",
-  event = "VeryLazy",
+  -- event = "VeryLazy",
   keys = {
     { "s", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash Jump" },
     { "R", mode = "o", function() require("flash").remote() end, desc = "Remote Flash" },

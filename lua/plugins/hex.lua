@@ -1,5 +1,5 @@
 return {
   "RaafatTurki/hex.nvim",
-  event = "VeryLazy",
+  cmd = { "HexToggle", "HexDump" },
   config = function() require("hex").setup() end,
 }

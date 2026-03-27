@@ -5,11 +5,12 @@
 ---@type LazySpec
 return {
   "nvim-treesitter/nvim-treesitter",
+  event = "VeryLazy",
   opts = {
     ensure_installed = {
       "lua",
-      "bash",
-      "vim",
+      -- "bash",
+      -- "vim",
       -- "c",
       -- "cpp",
       "css",

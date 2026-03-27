@@ -4,11 +4,19 @@ return {
   opts = {
     -- Highlight configuration
     highlights = {
-      char_insert = "#86F297",
+      char_insert = "#86E297",
       char_delete = "#FF9D9E",
     },
     diff = {
       layout = "inline",
+    },
+    keymaps = {
+      view = {
+        -- next_file = "]f", -- Next file in explorer/history mode
+        -- prev_file = "[f", -- Previous file in explorer/history mode
+        next_file = "<Tab>", -- Next file in explorer/history mode
+        prev_file = "<S-Tab>", -- Previous file in explorer/history mode
+      },
     },
   },
   keys = {
@@ -29,6 +37,27 @@ return {
         vim.cmd "CodeDiff file HEAD"
       end,
       desc = "diff this",
+    },
+    {
+      "<leader>gC",
+      "<cmd>CodeDiff history<cr>",
+      desc = "CodeDiff history",
+    },
+    {
+      "<leader>gc",
+      function()
+        local file = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(0), ":~")
+        vim.cmd("CodeDiff history " .. file)
+      end,
+      desc = "CodeDiff current file history",
+    },
+    {
+      "<leader>gm",
+      function()
+        local file = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(0), ":~")
+        vim.cmd("CodeDiff merge " .. file)
+      end,
+      desc = "CodeDiff merge view",
     },
   },
 }

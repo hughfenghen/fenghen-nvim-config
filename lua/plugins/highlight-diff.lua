@@ -1,5 +1,6 @@
 return {
   "barrettruth/diffs.nvim",
+  event = "VeryLazy",
   init = function()
     vim.g.diffs = {
       integrations = {

@@ -11,6 +11,7 @@
 ---@type LazySpec
 return {
   -- == Examples of Adding Plugins ==
+  { "stevearc/aerial.nvim", enabled = false },
   { "ray-x/lsp_signature.nvim", enabled = false, event = "BufRead" },
   -- You can disable default plugins as follows:
   { "max397574/better-escape.nvim", enabled = false },

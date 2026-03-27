@@ -1,11 +1,43 @@
 return {
   "nvim-neotest/neotest",
-  event = "VeryLazy",
+  -- event = "VeryLazy",
   dependencies = {
     "marilari88/neotest-vitest",
     "nvim-lua/plenary.nvim",
     "antoinemadec/FixCursorHold.nvim",
     "nvim-treesitter/nvim-treesitter",
+  },
+  keys = {
+    {
+      "<leader>ts",
+      function() require("neotest").summary.toggle() end,
+      desc = "Toggle test summary",
+    },
+    {
+      "<leader>to",
+      function() require("neotest").output_panel.toggle() end,
+      desc = "Open test output",
+    },
+    {
+      "<leader>tw",
+      function() require("neotest").watch.toggle() end,
+      desc = "Toggle watch",
+    },
+    {
+      "<leader>tS",
+      function() require("neotest").run.stop() end,
+      desc = "Stop test",
+    },
+    {
+      "<leader>tt",
+      ":Neotest run last<CR>",
+      desc = "Run last test",
+    },
+    {
+      "<leader>tn",
+      ":Neotest run<CR>",
+      desc = "Run nearest test",
+    },
   },
   config = function()
     local function contains_vitest_import(file_path)
@@ -54,29 +86,5 @@ return {
         open = "botright vsplit | vertical resize 70",
       },
     }
-    -- 打开测试摘要窗口
-    vim.keymap.set(
-      "n",
-      "<leader>ts",
-      function() require("neotest").summary.toggle() end,
-      { desc = "Toggle test summary" }
-    )
-
-    -- 打开测试输出
-    vim.keymap.set(
-      "n",
-      "<leader>to",
-      function() require("neotest").output_panel.toggle() end,
-      { desc = "Open test output" }
-    )
-
-    vim.keymap.set("n", "<leader>tw", function() require("neotest").watch.toggle() end, { desc = "Toggle watch" })
-
-    -- 停止测试
-    vim.keymap.set("n", "<leader>tS", function() require("neotest").run.stop() end, { desc = "Stop test" })
-
-    vim.keymap.set("n", "<leader>tt", ":Neotest run last<CR>", { desc = "Run last test" })
-    vim.keymap.set("n", "<leader>tn", ":Neotest run<CR>", { desc = "Run nearest test" })
-    -- vim.keymap.set("n", "<leader>tf", ":Neotest run file<CR>", { desc = "Run current file" })
   end,
 }

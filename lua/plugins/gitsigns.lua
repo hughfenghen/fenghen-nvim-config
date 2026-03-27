@@ -1,6 +1,6 @@
 return {
   "lewis6991/gitsigns.nvim",
-  lazy = true,
+  event = "VeryLazy",
   opts = function(_, opts)
     local old_on_attach = opts.on_attach
     opts.on_attach = function(bufnr)

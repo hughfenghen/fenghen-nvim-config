@@ -1,6 +1,6 @@
 return {
   "chrisgrieser/nvim-early-retirement",
-  event = "VeryLazy",
+  event = "BufWritePost",
   config = function()
     require("early-retirement").setup {
       retirementAgeMins = 60 * 5,
