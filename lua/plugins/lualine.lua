@@ -4,8 +4,10 @@ return {
   opts = function()
     -- NeoCodeium 状态组件
     local function neocodeium_status()
-      local ok, neocodeium = pcall(require, "neocodeium")
-      if not ok then return "" end
+      local neocodeium = package.loaded["neocodeium"]
+      if not neocodeium then return "" end
+      -- local ok, neocodeium = pcall(require, "neocodeium")
+      -- if not ok then return "" end
 
       local symbols = {
         status = {
