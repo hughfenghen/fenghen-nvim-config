@@ -16,6 +16,17 @@ end
 vim.opt.rtp:prepend(lazypath)
 vim.o.background = "light"
 
+vim.api.nvim_create_autocmd("ColorScheme", {
+  pattern = "*",
+  callback = function()
+    -- 覆盖背景色为透明 (推荐用于终端透明)
+    vim.api.nvim_set_hl(0, "Normal", { bg = "NONE", ctermbg = "NONE" })
+    -- vim.api.nvim_set_hl(0, "NormalFloat", { bg = "NONE", ctermbg = "NONE" })
+    -- vim.api.nvim_set_hl(0, "FloatBorder", { bg = "NONE" })
+    vim.api.nvim_set_hl(0, "NormalNC", { bg = "NONE", ctermbg = "NONE" })
+  end,
+})
+
 -- validate that lazy is available
 if not pcall(require, "lazy") then
   -- stylua: ignore
@@ -33,4 +44,3 @@ vim.opt.ttyfast = true
 
 require "utils.my-keyshort"
 require "utils.my-auto-saveread"
-require "utils.my-auto-fixwin"
