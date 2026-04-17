@@ -2,7 +2,7 @@ return {
   "MagicDuck/grug-far.nvim",
   opts = {
     engine = "rg",
-    -- engine = "ast-grep",
+    -- engine = "astgrep",
     windowCreationCommand = "vsplit",
   },
   keys = {
@@ -10,6 +10,11 @@ return {
       "<leader>sr",
       function() require("grug-far").open() end,
       desc = "Search and Replace",
+    },
+    {
+      "<leader>sR",
+      function() require("grug-far").open { engine = "astgrep" } end,
+      desc = "Search and Replace (astgrep)",
     },
     {
       "<leader>sw",

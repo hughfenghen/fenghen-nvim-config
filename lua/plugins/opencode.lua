@@ -36,6 +36,12 @@ return {
     }
 
     vim.o.autoread = true -- Required for `opts.events.reload`
+    vim.keymap.set(
+      "n",
+      "gob",
+      function() return require("opencode").operator "@buffer " .. "_" end,
+      { expr = true, desc = "Add buffer to opencode" }
+    )
 
     -- Recommended/example keymaps
     vim.keymap.set(
