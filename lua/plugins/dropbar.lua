@@ -1,6 +1,7 @@
 return {
   "Bekaboo/dropbar.nvim",
   event = "BufWritePost",
+  enabled = false,
   config = function()
     local utils = require "dropbar.utils"
     require("dropbar").setup {

@@ -157,6 +157,7 @@ return {
       function()
         local frecency = require("snacks.picker.core.frecency").new()
         Snacks.picker.smart {
+          hidden = true,
           matcher = {
             frecency = false,
             cwd_bonus = false,

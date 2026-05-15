@@ -31,17 +31,17 @@ return {
     end
 
     -- 文件路径组件
-    -- local function filename_with_path()
-    --   local filename = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(0), ":.")
-    --   if filename == "" then return "[No Name]" end
-    --
-    --   -- 如果路径太长，缩短显示
-    --   local max_length = math.floor(vim.o.columns * 0.25)
-    --   if #filename > max_length then filename = vim.fn.pathshorten(filename, 3) end
-    --
-    --   if vim.bo.modified then filename = filename .. " *" end
-    --   return filename
-    -- end
+    local function filename_with_path()
+      local filename = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(0), ":.")
+      if filename == "" then return "[No Name]" end
+
+      -- 如果路径太长，缩短显示
+      local max_length = math.floor(vim.o.columns * 0.25)
+      if #filename > max_length then filename = vim.fn.pathshorten(filename, 3) end
+
+      if vim.bo.modified then filename = filename .. " *" end
+      return filename
+    end
 
     -- 时钟组件
     local function clock() return os.date "🕑%H:%M" end
@@ -73,13 +73,16 @@ return {
         lualine_b = { "branch", "diff", "diagnostics" },
         lualine_c = {
           "%=",
-          -- {
-          --   filename_with_path,
-          --   color = function()
-          --     local utils = require "lualine.utils.utils"
-          --     return { fg = utils.extract_highlight_colors("Directory", "fg") }
-          --   end,
-          -- },
+          {
+            filename_with_path,
+            color = function()
+              local utils = require "lualine.utils.utils"
+              if vim.bo.modified then
+                return { fg = "#ffffff", bg = "#e06c75", gui = "bold" }
+              end
+              return { fg = utils.extract_highlight_colors("Directory", "fg") }
+            end,
+          },
           { search_cnt, type = "lua_expr" },
         },
         lualine_x = {
