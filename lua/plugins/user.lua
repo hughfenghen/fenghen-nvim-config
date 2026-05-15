@@ -17,6 +17,8 @@ return {
   { "max397574/better-escape.nvim", enabled = false },
   { "nvim-neo-tree/neo-tree.nvim", enabled = false },
   { "rebelot/heirline.nvim", enabled = false },
+  { "WhoIsSethDaniel/mason-tool-installer.nvim", enabled = false },
+  { "nvimtools/none-ls.nvim", enabled = false },
   {
     "windwp/nvim-autopairs",
     event = "InsertEnter",

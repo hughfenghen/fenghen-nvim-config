@@ -1,5 +1,5 @@
 return {
   "neovim/nvim-lspconfig",
-  event = { "BufWritePost" },
+  event = { "BufWritePre" },
   opts = {},
 }
